@@ -48,7 +48,7 @@ export interface AuthCredentials {
   passwords: string;
 }
 
-export interface AuthRespones {
+export interface AuthResponse {
   user: User;
   jwt: string;
 }

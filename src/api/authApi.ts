@@ -1,13 +1,13 @@
-import { AuthCredentials, AuthRespones, logoutResponse } from "@/interfaces";
+import { AuthCredentials, AuthResponse, logoutResponse } from "@/interfaces";
 import axiosInstance from "./axiosInstance";
 
-export const login = (credentials: AuthCredentials): Promise<AuthRespones> => {
+export const login = (credentials: AuthCredentials): Promise<AuthResponse> => {
   return axiosInstance.post("/auth/login", credentials).then((res) => res.data);
 };
 
 export const register = (
   credentials: AuthCredentials
-): Promise<AuthRespones> => {
+): Promise<AuthResponse> => {
   return axiosInstance
     .post("/auth/register", credentials)
     .then((res) => res.data);
