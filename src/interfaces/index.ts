@@ -38,7 +38,7 @@ export interface CreateContactResponse {
 export interface Conversation {
   id: number;
   participants: number[];
-  message: Messages[];
+  messages: Messages[];
 }
 export interface ConversationResponse {
   conversation: Conversation;
