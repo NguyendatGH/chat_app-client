@@ -8,7 +8,7 @@ interface DropDownProps {
 
 interface MenuItem {
   label: string;
-  onClick: () => any;
+  onClick: () => React.MouseEvent<SVGElement, MouseEvent>;
 }
 
 export const Dropdown: React.FC<DropDownProps> = ({menuItems}) => {

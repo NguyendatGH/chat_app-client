@@ -15,37 +15,37 @@ const Messages: React.FC = () => {
   const bottomRef = useRef<HTMLDivElement>(null);
   const isVisible = useOnScreen(bottomRef);
 
-  const {isLoading, isFetching} = useQuery(
-    ["conversation", conversationId],
-    () => getConversation(conversationId),
-    {
-      enabled: !!conversationId && conversationId !== 0,
-      onSuccess: (data) => {
-        setConversation(data.conversation);
-      },
-    }
-  );
+
+  const {data, isLoading, isFetching} = useQuery({
+    queryKey: ["conversation", conversationId],
+    queryFn: () => getConversation(conversationId),
+    enabled: !!conversationId && conversationId !== 0,
+  });
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({behavior: "smooth"});
+    if (data?.conversation) {
+      setConversation(data.conversation);
+    }
+  }, [data, setConversation]);
 
-    return () => {};
-  }, [isVisible, conversationId]);
+  
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({behavior: "smooth"});
+  }, [isVisible, conversationId, conversation?.messages]);
 
   return (
     <Container>
-      {isLoading && isFetching ? (
+      {isLoading || isFetching ? (
         <p>Loading...</p>
       ) : (
         <>
           {conversation && conversation?.messages?.length > 0 ? (
-            conversation?.messages.map((message) => <Message message={message} key={message.id} />)
+            conversation.messages.map((message) => <Message message={message} key={message.id} />)
           ) : (
             <p>No messages yet</p>
           )}
         </>
       )}
-
       <div ref={bottomRef}></div>
       <MessagesSideEffects />
     </Container>

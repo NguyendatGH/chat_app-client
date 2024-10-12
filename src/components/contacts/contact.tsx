@@ -6,7 +6,7 @@ import useQueryParams from "@/hooks/useQueryParams";
 import moment from "moment";
 
 export const Contact: React.FC<{contact: ContactI}> = React.memo((props) => {
-  const {photo, username, conversationId, unreadMessages, lastMessage} = props.contact;
+  const {photo, username, conversationId, unreadMessages, lastMessages} = props.contact;
   const queryParams = useQueryParams();
   const navigate = useNavigate();
 
@@ -21,9 +21,9 @@ export const Contact: React.FC<{contact: ContactI}> = React.memo((props) => {
       <Avatar onClick={onClick} alt="Avatar image" src={photo} />
       <InfoSection onClick={onClick}>
         <h3>{username}</h3>
-        <LastMessage>{lastMessage ? lastMessage.text : "No messages yet"}</LastMessage>
+        <LastMessage>{lastMessages ? lastMessages.text : "No messages yet"}</LastMessage>
         <LastMessageDate>
-          {lastMessage ? `Last message: ${moment(lastMessage.updatedAt).format("L")}` : null}
+          {lastMessages ? `Last message: ${moment(lastMessages.updateAt).format("L")}` : null}
         </LastMessageDate>
       </InfoSection>
 

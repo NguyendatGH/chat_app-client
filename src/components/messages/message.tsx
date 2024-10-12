@@ -1,6 +1,6 @@
 import React from "react";
 import useAuthContext from "@/store/authContext";
-import {Message as MessageI} from "@/interfaces";
+import {Messages as MessageI} from "@/interfaces";
 import styled from "styled-components";
 import moment from "moment";
 
@@ -11,7 +11,7 @@ export const Message = React.memo(({message}: {message: MessageI}) => {
   return (
     <StyledMessage isMyMessage={isMyMessage}>
       <p>{message.text}</p>
-      <CreatedAt>{moment(message.createdAt).format("lll")}</CreatedAt>
+      <CreatedAt>{moment(message.createAt).format("lll")}</CreatedAt>
     </StyledMessage>
   );
 });

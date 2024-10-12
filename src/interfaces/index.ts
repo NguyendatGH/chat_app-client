@@ -45,7 +45,7 @@ export interface ConversationResponse {
 }
 export interface AuthCredentials {
   username: string;
-  passwords: string;
+  password: string;
 }
 
 export interface AuthResponse {

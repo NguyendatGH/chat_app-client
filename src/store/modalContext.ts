@@ -3,7 +3,7 @@ import { immer } from "zustand/middleware/immer";
 
 export interface ModalsMap {
   profile: JSX.Element;
-  contactL: JSX.Element;
+  contact: JSX.Element;
 }
 
 interface ModalContext {

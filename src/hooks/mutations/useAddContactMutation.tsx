@@ -11,7 +11,7 @@ const useAddContactMutation = () => {
   const { addContact } = useContactsContext();
   const [error, setError] = useState<string>("");
 
-  const mutation = useMutation<CreateContactResponse, Error, string>({
+  const { mutate , isPending } = useMutation<CreateContactResponse, Error, string>({
     mutationFn: (username: string) => createContact(username), //maintain the datatype match with useMutation
     onSuccess: (response: CreateContactResponse) => {
       addContact(response.contact);
@@ -23,9 +23,7 @@ const useAddContactMutation = () => {
   });
 
   return {
-    mutate: mutation.mutate,
-    error,
-    status: mutation.status,
+   mutate, error, isPending
   };
 };
 

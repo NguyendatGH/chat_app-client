@@ -17,7 +17,7 @@ const ContactSchema = Yup.object().shape({
 });
 
 export const AddContactModal: React.FC = () => {
-  const {error, mutate, isLoading} = useAddContactMutation();
+  const {error, mutate, isPending} = useAddContactMutation();
 
   return (
     <Container>
@@ -30,7 +30,7 @@ export const AddContactModal: React.FC = () => {
       >
         <Form>
           <TextInput name="username" type="text" label="Username" />
-          <Button>{isLoading ? "Loading..." : "Add"}</Button>
+          <Button>{isPending ? "Loading..." : "Add"}</Button>
           <ErrorContainer>{error ?? null}</ErrorContainer>
         </Form>
       </Formik>

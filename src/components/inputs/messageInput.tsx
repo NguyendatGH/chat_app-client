@@ -60,7 +60,7 @@ export const MessageInput: React.FC = () => {
         ref={ref}
         placeholder="Write a message..."
       />
-      <StyledIcon onClick={(event) => onSubmit(event, ref)} />
+      <StyledIcon onClick={(event: React.MouseEvent<SVGElement, MouseEvent>) => onSubmit(event, ref)} />
     </InputContainer>
   );
 };
