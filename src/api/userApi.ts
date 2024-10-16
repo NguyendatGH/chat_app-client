@@ -13,17 +13,17 @@ const defaultHeader = () => {
   };
 };
 
-export const getContact = (): Promise<GetContactResponse> => {
-  return axiosInstance
+export const getContact = (): Promise<GetContactResponse> =>
+  axiosInstance
     .get("/contact", { headers: defaultHeader() })
     .then((response) => response.data);
-};
 
-export const createContact = (username: string): Promise<CreateContactResponse> =>
+export const createContact = (
+  username: string
+): Promise<CreateContactResponse> =>
   axiosInstance
-    .post("/contact", {username}, {headers: defaultHeader()})
+    .post("/contact", { username }, { headers: defaultHeader() })
     .then((response) => response.data);
-
 
 export const getConversation = (
   id: number | null

@@ -14,7 +14,7 @@ export const Contact: React.FC<{contact: ContactI}> = React.memo((props) => {
   const isActiveChat = conversationId === activeConversationId;
   const onClick = useCallback(() => {
     navigate(`/?conversation_id=${conversationId}`);
-  }, [conversationId]);
+  }, [conversationId, navigate]);
 
   return (
     <Container isActiveChat={isActiveChat}>

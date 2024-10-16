@@ -5,7 +5,7 @@ import styled from "styled-components";
 import useLoginMutation, {
   FormValue,
 } from "@/hooks/mutations/useLoginMutation";
-import authValidationSchema from "../authValidationSchema";
+import authValidationSchema from "../utils/authValidationSchema";
 
 const initialValues: FormValue = {
   username: "",

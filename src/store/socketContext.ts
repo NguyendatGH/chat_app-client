@@ -10,6 +10,7 @@ interface SocketContext {
 
 const useSocketContext = create<SocketContext>()(
   devtools(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     immer((set, get) => ({
       socket: io("http://localhost:5000", {
         withCredentials: true,

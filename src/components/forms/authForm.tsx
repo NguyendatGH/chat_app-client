@@ -4,7 +4,7 @@ import styled from "styled-components";
 import {Button} from "@/components/button";
 import {TextInput} from "@/components/inputs/textInput";
 import {AuthCredentials} from "@/interfaces";
-import authValidationSchema from "@/pages/auth/authValidationSchema";
+import authValidationSchema from "@/pages/auth/utils/authValidationSchema";
 import useAuthMutation from "@/hooks/mutations/useAuthMutation";
 
 interface AuthFormProps {

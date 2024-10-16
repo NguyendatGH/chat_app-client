@@ -4,7 +4,7 @@ import useRegisterMutation from "@/hooks/mutations/useRegisterMutation";
 import { AuthCredentials } from "@/interfaces";
 import { Formik, Form } from "formik";
 import styled from "styled-components";
-import authValidationSchema from "../authValidationSchema";
+import authValidationSchema from "../utils/authValidationSchema";
 
 const initialValues: AuthCredentials = {
   username: "",

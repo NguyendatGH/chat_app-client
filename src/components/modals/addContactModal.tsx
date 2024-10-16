@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import Button from '../buttons/button'
-import TextInput from '../inputs/textInput'
+import {TextInput} from '../inputs/textInput'
 import {Formik, Form} from 'formik'
 import * as Yup from 'yup'
 import useAddContactMutation from '@/hooks/mutations/useAddContactMutation'
@@ -17,7 +17,7 @@ const ContactSchema = Yup.object().shape({
 })
 
 const AddContactModal: React.FC = () => {
-  const {mutation, error} = useAddContactMutation()
+  const {mutate,error, isPending} = useAddContactMutation()
 
   return (
     <Container>
@@ -25,12 +25,12 @@ const AddContactModal: React.FC = () => {
 
       <Formik
         initialValues={initialValues}
-        onSubmit={(values) => mutation.mutateAsync(values.username)}
+        onSubmit={(values) => mutate(values.username)}
         validationSchema={ContactSchema}
       >
         <Form>
           <TextInput name='username' type='text' label='Username' />
-          <Button>{mutation.isLoading ? 'Loading...' : 'Add'}</Button>
+          <Button>{isPending ? 'Loading...' : 'Add'}</Button>
           <ErrorContainer>{error ?? null}</ErrorContainer>
         </Form>
       </Formik>

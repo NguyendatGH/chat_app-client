@@ -13,6 +13,7 @@ const errorHandler  = (error : unknown) : string =>{
     if(error instanceof Error){
         return (message = error.message);
     }
+    
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     return (message = "something went wrong!"+ String(error));
 };
