@@ -1,8 +1,8 @@
-import React, {useCallback, useState} from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-import {RiMenu3Fill} from "react-icons/ri";
-import {BiSearch} from "react-icons/bi";
-import {Dropdown} from "@/components/dropdown";
+import { RiMenu3Fill } from "react-icons/ri";
+import { BiSearch } from "react-icons/bi";
+import Dropdown from "@/components/dropdown/index";
 import useAuthContext from "@/store/authContext";
 import useModalContext from "@/store/modalContext";
 import useSocketContext from "@/store/socketContext";
@@ -11,10 +11,10 @@ import useContactsContext from "@/store/contactsContext";
 
 export const ActionsHeader = () => {
   const authContext = useAuthContext();
-  const {socket} = useSocketContext();
-  const {openModal} = useModalContext();
-  const {setFilterKey} = useContactsContext();
-  const {resetConversationState} = useConversationContext();
+  const { socket } = useSocketContext();
+  const { openModal } = useModalContext();
+  const { setFilterKey } = useContactsContext();
+  const { resetConversationState } = useConversationContext();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const onFilter = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setFilterKey(event.target.value);
@@ -49,12 +49,18 @@ export const ActionsHeader = () => {
       <Heading>
         <h2>Contacts</h2>
         <MenuIcon onClick={toggleMenu} size={22} />
-        {isMenuVisible && <Dropdown menuItems={menuItems} isOpen={isMenuVisible} />}
+        {isMenuVisible && (
+          <Dropdown menuItems={menuItems} isOpen={isMenuVisible} />
+        )}
       </Heading>
 
       <SearchContainer>
         <SearchIcon size={16} />
-        <SearchBar defaultValue="" placeholder="Search contacts" onChange={onFilter} />
+        <SearchBar
+          defaultValue=""
+          placeholder="Search contacts"
+          onChange={onFilter}
+        />
       </SearchContainer>
     </Container>
   );
@@ -77,7 +83,7 @@ const Heading = styled.div`
 const MenuIcon = styled(RiMenu3Fill)`
   cursor: pointer;
   margin-left: auto;
-  fill: ${({theme}) => theme.palette.primary.light};
+  fill: ${({ theme }) => theme.palette.primary.light};
 `;
 const SearchIcon = styled(BiSearch)`
   position: absolute;
@@ -96,7 +102,7 @@ const SearchBar = styled.input`
   outline: none;
   padding: 4px 4px 4px 26px;
   font-size: 18px;
-  background-color: ${({theme}) => theme.palette.background.light};
+  background-color: ${({ theme }) => theme.palette.background.light};
   border: none;
   border-radius: 4px;
   width: 100%;

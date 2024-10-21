@@ -15,7 +15,7 @@ export default function useOnScreen(ref: React.RefObject<HTMLDivElement>) {
     return () => {
       observer.disconnect();
     };
-  }, [ref]);
+  }, []);
 
   return isIntersecting;
 }

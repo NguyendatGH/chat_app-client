@@ -20,8 +20,10 @@ const useContactsContext = create<ContactsContext>()(
     filteredContact: [],
     filterKey: "",
     setContacts: (contacts) => {
+      // console.log("contacts to set: /(store)", contacts)
         set((state) => {
             state.contacts = contacts;
+            console.log(state);
           });
     }, 
     clearContacts: () => {
@@ -36,9 +38,13 @@ const useContactsContext = create<ContactsContext>()(
       },
       updateContactValues: (updatedContact) => {
         set((state) => {
+          console.log("Current contacts:", [...state.contacts]);
+          console.log("Updated contact ID:", updatedContact.id);
+          // console.log("contacts to update: /(store)", updatedContact)
           const contactPosition = state.contacts.findIndex(
             (contact) => contact.id === updatedContact.id
           );
+          console.log("contact position", contactPosition)
           if (contactPosition === -1) {
             return;
           }
@@ -47,6 +53,7 @@ const useContactsContext = create<ContactsContext>()(
       },
       filterContacts: () => {
         set((state) => {
+          console.log("filter : /(store)", state)
           let filtered = state.contacts.filter((contact) =>
             contact.username.includes(state.filterKey)
           );

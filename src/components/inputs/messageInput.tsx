@@ -2,65 +2,77 @@ import useAuthContext from "@/store/authContext";
 import useConversationContext from "@/store/conversationContext";
 import useSocketContext from "@/store/socketContext";
 import useQueryParams from "@/hooks/useQueryParams";
-import {IoSendSharp} from "react-icons/io5";
-import React, {useRef, useCallback} from "react";
+import { IoSendSharp } from "react-icons/io5";
+import React, { useRef, useCallback } from "react";
 import styled from "styled-components";
 
-type NewEvent = React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<SVGElement, MouseEvent>;
+type NewEvent =
+  | React.KeyboardEvent<HTMLInputElement>
+  | React.MouseEvent<SVGElement, MouseEvent>;
 
 export const MessageInput: React.FC = () => {
-  const {user} = useAuthContext();
-  const {socket} = useSocketContext();
+  const { user } = useAuthContext();
+  const { socket } = useSocketContext();
   const queryParams = useQueryParams();
-  const {conversation} = useConversationContext();
+  const { conversation } = useConversationContext();
   const conversationId = Number(queryParams.get("conversation_id"));
-  const ref = useRef(null);
+  console.log("conversationId/ client / messageInput: ", conversationId);
+  console.log("User / client / messageInput:", user);
+  console.log("Conversation / client / messageInput:", conversation);
+  console.log("Socket / client / messageInput:", socket);
 
-  const sendMessage = useCallback(
-    (ref: React.MutableRefObject<null | HTMLInputElement>) => {
-      if (!ref?.current?.value) {
-        return;
-      }
-      const newMessage = {
-        text: ref.current.value,
-        from: user?.id,
-        conversationId: conversationId,
-        createdAt: new Date(),
-      };
+  const ref = useRef<HTMLInputElement | null>(null);
 
-      console.log({newMessage, conversation, user});
-      socket.emit("message", {message: newMessage, conversation: conversation, myUserId: user?.id});
-      ref.current.value = "";
-    },
-    [conversation, user]
-  );
+  const sendMessage = useCallback(() => {
+    console.log("Ref value:", ref.current?.value);
+    console.log("Conversation:", conversation);
+    console.log("User:", user);
+    if (!ref.current?.value || !user || !conversationId) {
+      return;
+    }
+
+    const newMessage = {
+      text: ref.current.value,
+      from: user.id,
+      conversationId: conversationId,
+      createdAt: new Date(),
+    };
+
+    console.log("new message/ client / messageInput: ", newMessage);
+    socket.emit("message", {
+      message: newMessage,
+      conversation,
+      myUserId: user.id,
+    });
+    ref.current.value = ""; // Reset input field
+  }, [conversation, user]);
 
   const onSubmit = useCallback(
-    (event: NewEvent, ref: React.MutableRefObject<null | HTMLInputElement>) => {
+    (event: NewEvent) => {
+      console.log("Event triggered:", event);
+      console.log("Ref state on submit:", ref);
       if (!conversation) {
+        console.log("no conversation / from messageInput");
         return;
       }
 
       if (event.type === "keydown") {
-        if ((event as React.KeyboardEvent).key !== "Enter") {
-          return;
+        if ((event as React.KeyboardEvent).key === "Enter") {
+          console.log("Enter key pressed, calling sendMessage");
+          sendMessage();
         }
-        return sendMessage(ref);
       } else {
-        return sendMessage(ref);
+        console.log("Icon clicked, calling sendMessage");
+        sendMessage();
       }
     },
-    [conversation]
+    [conversation, sendMessage]
   );
 
   return (
     <InputContainer>
-      <Input
-        onKeyDown={(event) => onSubmit(event, ref)}
-        ref={ref}
-        placeholder="Write a message..."
-      />
-      <StyledIcon onClick={(event: React.MouseEvent<SVGElement, MouseEvent>) => onSubmit(event, ref)} />
+      <Input onKeyDown={onSubmit} ref={ref} placeholder="Write a message..." />
+      <StyledIcon onClick={onSubmit} />
     </InputContainer>
   );
 };
@@ -71,8 +83,8 @@ const Input = styled.input`
   outline: none;
   padding: 6px;
   font-size: 18px;
-  background-color: ${({theme}) => theme.palette.background.dark};
-  border: 2px solid ${({theme}) => theme.palette.gray.main};
+  background-color: ${({ theme }) => theme.palette.background.dark};
+  border: 2px solid ${({ theme }) => theme.palette.gray.main};
   border-radius: 4px;
 `;
 
@@ -84,7 +96,7 @@ const InputContainer = styled.div`
 `;
 
 const StyledIcon = styled(IoSendSharp)`
-  fill: ${({theme}) => theme.palette.primary.light};
+  fill: ${({ theme }) => theme.palette.primary.light};
   width: 30px;
   height: 30px;
   margin: 0 10px;

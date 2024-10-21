@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { AuthForm } from "@/components/forms/authForm";
-import { Link } from "@/components/link";
+import { Link } from "@/components/links/link";
 const Login = () => {
+  console.log("hi");
   return (
     <>
       <Container>

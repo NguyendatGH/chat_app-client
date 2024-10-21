@@ -2,13 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 
 interface DropDownProps {
-  menuItems: MenuItem[]
-  isOpen: boolean
+  menuItems: MenuItem[];
+  isOpen: boolean;
 }
 
 interface MenuItem {
-  label: string
-  onClick: () => any
+  label: string;
+  onClick: () => unknown;
 }
 
 const Dropdown: React.FC<DropDownProps> = ({menuItems}) => {

@@ -22,12 +22,18 @@ const useAuthMutation = () => {
       return type === "register" ? registerApi(value) : loginApi(value);
     },
     onSuccess: ({ jwt, user }) => {
+
+      //save infor to localStorage
       setItemToLocalStorage("user", user);
       setItemToLocalStorage("jwt", jwt);
       setItemToLocalStorage("isAuthenticated", true);
 
+
+
+      //seting user to storage
       login({ jwt, user });
 
+      //emit socket function
       socket.emit("login", user.id);
     },
     onError(error: unknown) {

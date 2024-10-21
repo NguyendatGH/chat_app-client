@@ -13,9 +13,8 @@ export const Contacts: React.FC = () => {
   const queryParams = useQueryParams();
   const conversationId = Number(queryParams.get("conversation_id"));
   const { user } = useAuthContext();
-
   const { socket } = useSocketContext();
-
+  console.log("running index/contact components: ")
   const {
     filteredContact,
     setContacts,
@@ -30,14 +29,25 @@ export const Contacts: React.FC = () => {
     queryKey: ["contacts"],
     queryFn: getContact,
     onSuccess: (data: GetContactResponse) => {
+      console.log(data.contacts); //contact list
       setContacts(data.contacts);
     },
   } as UseQueryOptions<GetContactResponse, Error>);
 
+  console.log(filteredContact);
+
   useEffect(() => {
-    socket.on("newContact", (contact: Contact) => addContact(contact));
-    socket.on("updateContactValues", (contact: Contact) =>
+    console.log("log at contacts component  / useEffect");
+
+    socket.on("newContact", (contact: Contact) => {
+      console.log("contact new", contact);
+      addContact(contact);
+    });
+    socket.on("updateContactValues", (contact: Contact) =>{
+      // console.log("uodate contact : ", contact);
       updateContactValues(contact)
+
+    }
     );
     socket.on("updateMyContact", (contact: Contact) =>
       updateContactValues(contact)
@@ -47,11 +57,12 @@ export const Contacts: React.FC = () => {
     return () => {
       socket.off();
     };
-  }, [addContact, conversationId, socket, updateContactValues, user?.id]);
+  }, [conversationId]);
 
   useEffect(() => {
+    console.log("filaterContacts res : ", filterContacts());
     filterContacts();
-  }, [filterKey, contacts, filterContacts]);
+  }, [filterKey, contacts]);
 
   return (
     <Container>

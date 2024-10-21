@@ -3,7 +3,7 @@ import {Formik, Form} from "formik";
 import * as Yup from "yup";
 import useAddContactMutation from "@/hooks/mutations/useAddContactMutation";
 import {TextInput} from "@/components/inputs/textInput";
-import {Button} from "@/components/button";
+import Button from "@/components/buttons/button";
 
 const initialValues = {
   username: "",

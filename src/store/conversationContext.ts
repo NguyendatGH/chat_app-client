@@ -7,15 +7,18 @@ interface ConversationContext {
   conversation: Conversation | null;
   setActiveConversationId: (id: number) => void;
   setConversation: (conversation: Conversation) => void;
+  resetConversationState: () => void;
   addMessage: (message: Messages) => void;
 }
 
 const useConversationContext = create<ConversationContext>()(
   immer((set) => ({
+
     activeConversationId: null,
     conversation: null,
     setActiveConversationId: (id: number) => {
-      set((state) => {
+      console.log("id/ from useConversation storage: ", id)
+      set((state) => {  
         state.activeConversationId = id;
       });
     },
@@ -26,7 +29,7 @@ const useConversationContext = create<ConversationContext>()(
     },
     addMessage: (message: Messages) => {
       set((state) => {
-        state.conversation?.message?.push(message);
+        state.conversation?.messages?.push(message);
       });
     },
     resetConversationState: () => {

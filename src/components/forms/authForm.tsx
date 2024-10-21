@@ -1,7 +1,7 @@
 import React from "react";
 import {Formik, Form} from "formik";
 import styled from "styled-components";
-import {Button} from "@/components/button";
+import Button from "@/components/buttons/button";
 import {TextInput} from "@/components/inputs/textInput";
 import {AuthCredentials} from "@/interfaces";
 import authValidationSchema from "@/pages/auth/utils/authValidationSchema";

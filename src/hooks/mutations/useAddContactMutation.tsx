@@ -14,6 +14,7 @@ const useAddContactMutation = () => {
   const { mutate , isPending } = useMutation<CreateContactResponse, Error, string>({
     mutationFn: (username: string) => createContact(username), //maintain the datatype match with useMutation
     onSuccess: (response: CreateContactResponse) => {
+      console.log("useAddContactMutation/ respone success: ", response);
       addContact(response.contact);
       closeModal();
     },
