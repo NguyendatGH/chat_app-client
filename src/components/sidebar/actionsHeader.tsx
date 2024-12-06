@@ -2,7 +2,7 @@ import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import { RiMenu3Fill } from "react-icons/ri";
 import { BiSearch } from "react-icons/bi";
-import Dropdown from "@/components/dropdown/index";
+import {Dropdown} from "@/components/dropdown/index";
 import useAuthContext from "@/store/authContext";
 import useModalContext from "@/store/modalContext";
 import useSocketContext from "@/store/socketContext";
@@ -17,6 +17,7 @@ export const ActionsHeader = () => {
   const { resetConversationState } = useConversationContext();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const onFilter = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("action header:"+event.target.value);
     setFilterKey(event.target.value);
   }, []);
 

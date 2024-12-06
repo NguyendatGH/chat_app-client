@@ -11,10 +11,13 @@ export const Contact: React.FC<{contact: ContactI}> = React.memo((props) => {
   const navigate = useNavigate();
 
   const activeConversationId = Number(queryParams.get("conversation_id"));
+  console.log(activeConversationId);
   const isActiveChat = conversationId === activeConversationId;
+  console.log("isActive chat?",isActiveChat)
   const onClick = useCallback(() => {
-    navigate(`/?conversation_id=${conversationId}`);
     console.log(conversationId)
+    navigate(`/?conversation_id=${conversationId}`);
+   
   }, [conversationId]);
 
   return (

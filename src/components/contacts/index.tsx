@@ -1,4 +1,4 @@
-import { getContact } from "@/api/userApi";
+import { getContacts } from "@/api/userApi";
 import useAuthContext from "@/store/authContext";
 import useContactsContext from "@/store/contactsContext";
 import useSocketContext from "@/store/socketContext";
@@ -16,8 +16,8 @@ export const Contacts: React.FC = () => {
   const { socket } = useSocketContext();
   console.log("running index/contact components: ")
   const {
-    filteredContact,
-    setContacts,
+    filteredContacts,
+    // setContacts,
     addContact,
     updateContactValues,
     filterKey,
@@ -27,14 +27,13 @@ export const Contacts: React.FC = () => {
 
   const { isLoading } = useQuery<GetContactResponse, Error>({
     queryKey: ["contacts"],
-    queryFn: getContact,
+    queryFn: getContacts,
     onSuccess: (data: GetContactResponse) => {
-      console.log(data.contacts); //contact list
-      setContacts(data.contacts);
+      useContactsContext.getState().setContacts(data.contacts);
     },
-  } as UseQueryOptions<GetContactResponse, Error>);
+  } as UseQueryOptions<GetContactResponse, Error>); 
 
-  console.log(filteredContact);
+  console.log(filteredContacts);
 
   useEffect(() => {
     console.log("log at contacts component  / useEffect");
@@ -44,7 +43,6 @@ export const Contacts: React.FC = () => {
       addContact(contact);
     });
     socket.on("updateContactValues", (contact: Contact) =>{
-      // console.log("uodate contact : ", contact);
       updateContactValues(contact)
 
     }
@@ -70,8 +68,8 @@ export const Contacts: React.FC = () => {
         <p>Loading...</p>
       ) : (
         <>
-          {filteredContact && filteredContact.length > 0 ? (
-            filteredContact?.map((contact) => (
+          {filteredContacts && filteredContacts.length > 0 ? (
+            filteredContacts?.map((contact) => (
               <ContactComponent key={contact.id} contact={contact} />
             ))
           ) : (

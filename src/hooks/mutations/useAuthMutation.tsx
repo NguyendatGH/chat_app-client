@@ -17,18 +17,19 @@ const useAuthMutation = () => {
   const [error, setError] = useState<string>("");
   const { socket } = useSocketContext();
 
-  const { isPending, mutate } = useMutation<AuthResponse, Error, AuthMutation>({
+  const { isPending, isSuccess, isError, mutate } = useMutation<
+    AuthResponse,
+    Error,
+    AuthMutation
+  >({
     mutationFn: ({ value, type }: AuthMutation) => {
       return type === "register" ? registerApi(value) : loginApi(value);
     },
     onSuccess: ({ jwt, user }) => {
-
       //save infor to localStorage
       setItemToLocalStorage("user", user);
       setItemToLocalStorage("jwt", jwt);
       setItemToLocalStorage("isAuthenticated", true);
-
-
 
       //seting user to storage
       login({ jwt, user });
@@ -41,7 +42,7 @@ const useAuthMutation = () => {
     },
   });
 
-  return { isPending, mutate, error };
+  return { isPending, isSuccess, isError, mutate, error };
 };
 
 export default useAuthMutation;

@@ -4,7 +4,7 @@ import { immer } from "zustand/middleware/immer";
 
 interface ContactsContext {
   contacts: Contact[];
-  filteredContact: Contact[];
+  filteredContacts: Contact[];
   filterKey: string;
   setContacts: (contacts: Contact[]) => void;
   clearContacts: () => void;
@@ -17,13 +17,13 @@ interface ContactsContext {
 const useContactsContext = create<ContactsContext>()(
   immer((set) => ({
     contacts: [],
-    filteredContact: [],
+    filteredContacts: [],
     filterKey: "",
     setContacts: (contacts) => {
       // console.log("contacts to set: /(store)", contacts)
         set((state) => {
             state.contacts = contacts;
-            console.log(state);
+            
           });
     }, 
     clearContacts: () => {
@@ -31,16 +31,16 @@ const useContactsContext = create<ContactsContext>()(
           state.contacts = [];
         });
       },
-      addContact: (contact) => {
+    addContact: (contact) => {
         set((state) => {
           state.contacts.unshift(contact);
         });
       },
-      updateContactValues: (updatedContact) => {
+    updateContactValues: (updatedContact) => {
         set((state) => {
           console.log("Current contacts:", [...state.contacts]);
           console.log("Updated contact ID:", updatedContact.id);
-          // console.log("contacts to update: /(store)", updatedContact)
+          
           const contactPosition = state.contacts.findIndex(
             (contact) => contact.id === updatedContact.id
           );
@@ -53,20 +53,22 @@ const useContactsContext = create<ContactsContext>()(
       },
       filterContacts: () => {
         set((state) => {
-          console.log("filter : /(store)", state)
+          // console.log("filter key in filterContacts: " +state.filterKey);
           let filtered = state.contacts.filter((contact) =>
             contact.username.includes(state.filterKey)
           );
+          console.log("filtered " + filtered);
           if (!state.filterKey) {
             filtered = state.contacts;
           }
-          state.filteredContact = filtered;
+          state.filteredContacts = filtered;
         });
       },
       setFilterKey: (key: string) => {
         set((state) => {
           state.filterKey = key;
         });
+        console.log("filter key value: " +key);
       },
   }))
 );

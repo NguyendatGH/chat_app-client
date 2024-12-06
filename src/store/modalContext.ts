@@ -1,10 +1,5 @@
-import {create} from "zustand";
+import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
-
-export interface ModalsMap {
-  profile: JSX.Element;
-  contact: JSX.Element;
-}
 
 interface ModalContext {
   isModalOpen: boolean;
@@ -13,24 +8,28 @@ interface ModalContext {
   closeModal: () => void;
 }
 
+export interface ModalsMap {
+  profile: JSX.Element;
+  contact: JSX.Element;
+}
+
 const useModalContext = create<ModalContext>()(
-    immer((set) => ({
-        isModalOpen : false,
-        currentModal : null,
-        openModal: (modalKey) => {
-            set((state) =>{
-                state.isModalOpen = true;
-                state.currentModal = modalKey;
-            })
-        },
+  immer((set) => ({
+    isModalOpen: false,
+    currentModal: null,
+    openModal: (modalKey) => {
+      set((state) => {
+        state.isModalOpen = true;
+        state.currentModal = modalKey;
+      });
+    },
 
-
-        closeModal: () =>{
-            set((state) =>{
-                state.isModalOpen = false;
-                state.currentModal = null;
-            })
-        }
-    }))
+    closeModal: () => {
+      set((state) => {
+        state.isModalOpen = false;
+        state.currentModal = null;
+      });
+    },
+  }))
 );
 export default useModalContext;

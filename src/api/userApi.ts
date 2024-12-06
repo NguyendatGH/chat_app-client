@@ -6,29 +6,40 @@ import {
 } from "@/interfaces";
 import { getItemFromLocalStorage } from "@/utils/localStorage";
 
-const defaultHeader = () => {
+const defaultHeaders = () => {
   return {
     Authorization: `Bearer ${getItemFromLocalStorage("jwt")}`,
     "Content-type": "application/json",
   };
 };
 
-export const getContact = (): Promise<GetContactResponse> =>
+// console.log(defaultHeaders()); 
+
+export const getContacts = (): Promise<GetContactResponse> =>
   axiosInstance
-    .get("/contact", { headers: defaultHeader() })
-    .then((response) => response.data);
+    .get("/contact", { headers: defaultHeaders() })
+    .then((response) => {
+      console.log(response.data)
+      return response.data;
+    });
 
 export const createContact = (
   username: string
 ): Promise<CreateContactResponse> =>
   axiosInstance
-    .post("/contact", { username }, { headers: defaultHeader() })
-    .then((response) => response.data);
+    .post("/contact", { username }, { headers: defaultHeaders() })
+    .then((response) => {
+      console.log("create new user!" +response.data);
+      return response.data
+    });
 
-export const getConversation = (
-  id: number | null
-): Promise<ConversationResponse> => {
-  return axiosInstance
-    .get(`conversation/${id}`, { headers: defaultHeader() })
-    .then((response) => response.data);
-};
+    export const getConversation = (
+      id: number | null
+    ): Promise<ConversationResponse> => {
+      return axiosInstance
+        .get(`/conversation/${id}`, { headers: defaultHeaders() })
+        .then((response) => {
+          console.log("get conversation from front end / user api: ",response.data);
+          return response.data;
+        });
+    };

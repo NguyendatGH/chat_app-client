@@ -1,4 +1,4 @@
-import { Conversation, Messages } from "@/interfaces";
+import { Conversation, Message } from "@/interfaces";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
@@ -8,7 +8,7 @@ interface ConversationContext {
   setActiveConversationId: (id: number) => void;
   setConversation: (conversation: Conversation) => void;
   resetConversationState: () => void;
-  addMessage: (message: Messages) => void;
+  addMessage: (message: Message) => void;
 }
 
 const useConversationContext = create<ConversationContext>()(
@@ -27,7 +27,7 @@ const useConversationContext = create<ConversationContext>()(
         state.conversation = conversation;
       });
     },
-    addMessage: (message: Messages) => {
+    addMessage: (message: Message) => {
       set((state) => {
         state.conversation?.messages?.push(message);
       });

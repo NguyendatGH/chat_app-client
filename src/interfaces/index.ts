@@ -18,7 +18,7 @@ export interface Contact {
   status: "online" | "offline";
 }
 
-export interface Messages {
+export interface Message {
   id: number;
   from: number;
   text: string;
@@ -38,7 +38,7 @@ export interface CreateContactResponse {
 export interface Conversation {
   id: number;
   participants: number[];
-  messages: Messages[];
+  messages: Message[];
 }
 export interface ConversationResponse {
   conversation: Conversation;

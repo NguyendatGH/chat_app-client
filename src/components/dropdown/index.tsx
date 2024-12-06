@@ -11,7 +11,7 @@ interface MenuItem {
   onClick: () => unknown;
 }
 
-const Dropdown: React.FC<DropDownProps> = ({menuItems}) => {
+export const Dropdown: React.FC<DropDownProps> = ({menuItems}) => {
   return (
     <Container>
       {menuItems.map((item) => (
@@ -47,4 +47,4 @@ const MenuItem = styled.div`
   }
 `
 
-export default Dropdown
+
