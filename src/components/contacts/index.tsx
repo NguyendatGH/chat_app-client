@@ -11,14 +11,18 @@ import { Contact as ContactComponent } from "./contact";
 
 export const Contacts: React.FC = () => {
   const queryParams = useQueryParams();
-  const conversationId = Number(queryParams.get("conversation_id"));
+  const conversationId = queryParams.get("conversationId")
+    ? Number(queryParams.get("conversationId")) + 1
+    : null;
+
+  console.log("conversation id: ", conversationId);
   const { user } = useAuthContext();
   const { socket } = useSocketContext();
-  console.log("running index/contact components: ")
+  console.log("running index/contact components: ");
   const {
     filteredContacts,
-    // setContacts,
     addContact,
+    setContacts,
     updateContactValues,
     filterKey,
     filterContacts,
@@ -27,38 +31,43 @@ export const Contacts: React.FC = () => {
 
   const { isLoading } = useQuery<GetContactResponse, Error>({
     queryKey: ["contacts"],
-    queryFn: getContacts,
-    onSuccess: (data: GetContactResponse) => {
-      useContactsContext.getState().setContacts(data.contacts);
+    queryFn: async () => {
+      try {
+        console.log("Fetching contacts...");
+        const data = await getContacts();
+        setContacts(data.contacts);
+        return data;
+      } catch (error) {
+        console.error("Error fetching contacts:", error);
+        throw error;
+      }
     },
-  } as UseQueryOptions<GetContactResponse, Error>); 
+  } as UseQueryOptions<GetContactResponse, Error>);
 
-  console.log(filteredContacts);
+  // console.log("isLoading status after useQuery call: ", isLoading);
 
   useEffect(() => {
-    console.log("log at contacts component  / useEffect");
-
     socket.on("newContact", (contact: Contact) => {
       console.log("contact new", contact);
       addContact(contact);
+      filterContacts();
     });
-    socket.on("updateContactValues", (contact: Contact) =>{
-      updateContactValues(contact)
-
-    }
-    );
+    socket.on("updateContactValues", (contact: Contact) => {
+      updateContactValues(contact);
+    });
     socket.on("updateMyContact", (contact: Contact) =>
       updateContactValues(contact)
     );
     socket.emit("conversationChange", { conversationId, myUserId: user?.id });
 
     return () => {
-      socket.off();
+      socket.off("newContact");
+      socket.off("updateContactValues");
+      socket.off("updateMyContact");
     };
-  }, [conversationId]);
+  }, [conversationId, socket, user?.id]);
 
   useEffect(() => {
-    console.log("filaterContacts res : ", filterContacts());
     filterContacts();
   }, [filterKey, contacts]);
 
@@ -68,6 +77,8 @@ export const Contacts: React.FC = () => {
         <p>Loading...</p>
       ) : (
         <>
+          {console.log("is Loading : ", isLoading)}
+          {console.log("Filtered Contacts:", filteredContacts)}
           {filteredContacts && filteredContacts.length > 0 ? (
             filteredContacts?.map((contact) => (
               <ContactComponent key={contact.id} contact={contact} />

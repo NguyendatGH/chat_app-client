@@ -15,13 +15,17 @@ const defaultHeaders = () => {
 
 // console.log(defaultHeaders()); 
 
-export const getContacts = (): Promise<GetContactResponse> =>
-  axiosInstance
-    .get("/contact", { headers: defaultHeaders() })
-    .then((response) => {
-      console.log(response.data)
-      return response.data;
+export const getContacts = async (): Promise<GetContactResponse> => {
+  try {
+    const response = await axiosInstance.get("/contact", {
+      headers: defaultHeaders(),
     });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching contacts:", error);
+    throw error;
+  }
+};
 
 export const createContact = (
   username: string

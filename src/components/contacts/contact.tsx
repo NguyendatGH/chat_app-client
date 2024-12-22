@@ -15,17 +15,18 @@ export const Contact: React.FC<{contact: ContactI}> = React.memo((props) => {
   const isActiveChat = conversationId === activeConversationId;
   console.log("isActive chat?",isActiveChat)
   const onClick = useCallback(() => {
-    console.log(conversationId)
     navigate(`/?conversation_id=${conversationId}`);
    
   }, [conversationId]);
 
+//  console.log("all props: ", photo, username, conversationId, unreadMessages, lastMessages)
   return (
     <Container isActiveChat={isActiveChat}>
       <Avatar onClick={onClick} alt="Avatar image" src={photo} />
       <InfoSection onClick={onClick}>
         <h3>{username}</h3>
-        <LastMessage>{lastMessages ? lastMessages.text : "No messages yet"}</LastMessage>
+        <LastMessage>
+          {lastMessages ? lastMessages.text : "No messages yet"}</LastMessage>
         <LastMessageDate>
           {lastMessages ? `Last message: ${moment(lastMessages.updateAt).format("L")}` : null}
         </LastMessageDate>

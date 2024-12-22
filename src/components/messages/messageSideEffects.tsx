@@ -1,7 +1,7 @@
 import useConversationContext from "@/store/conversationContext";
 import useSocketContext from "@/store/socketContext";
 import useQueryParams from "@/hooks/useQueryParams";
-import {Messages} from "@/interfaces";
+import {Message} from "@/interfaces";
 import React, {useEffect} from "react";
 
 export const MessagesSideEffects = React.memo(() => {
@@ -11,13 +11,13 @@ export const MessagesSideEffects = React.memo(() => {
   const conversationId = Number(queryParams.get("conversation_id"));
 
   useEffect(() => {
-    socket.on("newMessage", (message: Messages) => {
+    socket.on("newMessage", (message: Message) => {
       if (message.conversationId === conversationId) {
         addMessage(message);
       }
     });
 
-    socket.on("selfMessage", (message: Messages) => {
+    socket.on("selfMessage", (message: Message) => {
       if (message.conversationId === conversationId) {
         addMessage(message);
       }

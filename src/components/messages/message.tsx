@@ -1,6 +1,6 @@
 import React from "react";
 import useAuthContext from "@/store/authContext";
-import {Messages as MessageI} from "@/interfaces";
+import {Message as MessageI} from "@/interfaces";
 import styled from "styled-components";
 import moment from "moment";
 

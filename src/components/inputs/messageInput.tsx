@@ -19,7 +19,7 @@ export const MessageInput: React.FC = () => {
   console.log("conversationId/ client / messageInput: ", conversationId);
   console.log("User / client / messageInput:", user);
   console.log("Conversation / client / messageInput:", conversation);
-  console.log("Socket / client / messageInput:", socket);
+  // console.log("Socket / client / messageInput:", socket);
 
   const ref = useRef<HTMLInputElement | null>(null);
 
@@ -38,13 +38,12 @@ export const MessageInput: React.FC = () => {
       createdAt: new Date(),
     };
 
-    console.log("new message/ client / messageInput: ", newMessage);
     socket.emit("message", {
       message: newMessage,
       conversation,
       myUserId: user.id,
     });
-    ref.current.value = ""; // Reset input field
+    ref.current.value = ""; 
   }, [conversation, user]);
 
   const onSubmit = useCallback(
