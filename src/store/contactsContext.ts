@@ -45,21 +45,6 @@ const useContactsContext = create<ContactsContext>()(
 
     updateContactValues: (updatedContact) => {
       set((state) => {
-        // console.log("Current contacts:", state.contacts);
-        // console.log("updated Contact and their id:", updatedContact,updatedContact.id);
-        
-        // console.log(
-        //   "State contacts IDs:",
-        //   state.contacts.map((contact) => contact.id)
-        // );
-
-        // console.log(
-        //   "Existing Contact IDs:",
-        //   state.contacts.map((contact) => contact.id)
-        // );
-
-        // console.log('Contacts array:', state.contacts);
-
 
         const contactPosition = state.contacts.findIndex(
           (contact) => contact.id === updatedContact.id

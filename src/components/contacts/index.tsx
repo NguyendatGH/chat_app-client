@@ -44,7 +44,6 @@ export const Contacts: React.FC = () => {
     },
   } as UseQueryOptions<GetContactResponse, Error>);
 
-  // console.log("isLoading status after useQuery call: ", isLoading);
 
   useEffect(() => {
     socket.on("newContact", (contact: Contact) => {

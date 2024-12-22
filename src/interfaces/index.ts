@@ -11,10 +11,10 @@ export interface Contact {
   conversationId: number;
   userId: number;
   unreadMessages: number;
-  lastMessages: {
+  lastMessage: {
     text: string;
     updateAt: string;
-  };
+  } | null;
   status: "online" | "offline";
 }
 

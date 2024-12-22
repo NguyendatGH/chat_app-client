@@ -16,10 +16,7 @@ export const MessageInput: React.FC = () => {
   const queryParams = useQueryParams();
   const { conversation } = useConversationContext();
   const conversationId = Number(queryParams.get("conversation_id"));
-  console.log("conversationId/ client / messageInput: ", conversationId);
-  console.log("User / client / messageInput:", user);
-  console.log("Conversation / client / messageInput:", conversation);
-  // console.log("Socket / client / messageInput:", socket);
+
 
   const ref = useRef<HTMLInputElement | null>(null);
 
@@ -37,6 +34,7 @@ export const MessageInput: React.FC = () => {
       conversationId: conversationId,
       createdAt: new Date(),
     };
+
 
     socket.emit("message", {
       message: newMessage,

@@ -1,34 +1,47 @@
 import {Contact as ContactI} from "@/interfaces";
-import React, {useCallback} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import styled from "styled-components";
 import {useNavigate} from "react-router-dom";
 import useQueryParams from "@/hooks/useQueryParams";
 import moment from "moment";
 
+
 export const Contact: React.FC<{contact: ContactI}> = React.memo((props) => {
-  const {photo, username, conversationId, unreadMessages, lastMessages} = props.contact;
+  const {photo, username, conversationId, unreadMessages : inititalUnreadMessages, lastMessage} = props.contact;
+
+  const [unreadMessages, setUnreadMessages] = useState(inititalUnreadMessages);
+ 
+
   const queryParams = useQueryParams();
   const navigate = useNavigate();
 
   const activeConversationId = Number(queryParams.get("conversation_id"));
+
   console.log(activeConversationId);
   const isActiveChat = conversationId === activeConversationId;
-  console.log("isActive chat?",isActiveChat)
+ 
+  // console.log("isActive chat?",isActiveChat)
+ 
+  useEffect(() => {
+    if(isActiveChat){
+      setUnreadMessages(0);
+    }
+  }, [isActiveChat]);
+
   const onClick = useCallback(() => {
     navigate(`/?conversation_id=${conversationId}`);
-   
   }, [conversationId]);
+  
 
-//  console.log("all props: ", photo, username, conversationId, unreadMessages, lastMessages)
   return (
     <Container isActiveChat={isActiveChat}>
       <Avatar onClick={onClick} alt="Avatar image" src={photo} />
       <InfoSection onClick={onClick}>
         <h3>{username}</h3>
         <LastMessage>
-          {lastMessages ? lastMessages.text : "No messages yet"}</LastMessage>
+          {lastMessage ? lastMessage?.text : "No messages yet"}</LastMessage>
         <LastMessageDate>
-          {lastMessages ? `Last message: ${moment(lastMessages.updateAt).format("L")}` : null}
+          {lastMessage ? `Last message: ${moment(lastMessage.updateAt).format("L")}` : null}
         </LastMessageDate>
       </InfoSection>
 
