@@ -1,6 +1,8 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
+
+
 interface ModalContext {
   isModalOpen: boolean;
   currentModal: keyof ModalsMap | null;
@@ -12,6 +14,7 @@ export interface ModalsMap {
   profile: JSX.Element;
   contact: JSX.Element;
 }
+
 
 const useModalContext = create<ModalContext>()(
   immer((set) => ({

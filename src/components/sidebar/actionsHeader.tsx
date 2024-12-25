@@ -43,6 +43,7 @@ export const ActionsHeader = () => {
         resetConversationState();
       },
     },
+    
   ];
 
   return (

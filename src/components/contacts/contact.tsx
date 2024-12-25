@@ -4,6 +4,7 @@ import styled from "styled-components";
 import {useNavigate} from "react-router-dom";
 import useQueryParams from "@/hooks/useQueryParams";
 import moment from "moment";
+import { BsThreeDots } from "react-icons/bs";
 
 
 export const Contact: React.FC<{contact: ContactI}> = React.memo((props) => {
@@ -17,7 +18,6 @@ export const Contact: React.FC<{contact: ContactI}> = React.memo((props) => {
 
   const activeConversationId = Number(queryParams.get("conversation_id"));
 
-  console.log(activeConversationId);
   const isActiveChat = conversationId === activeConversationId;
  
   // console.log("isActive chat?",isActiveChat)
@@ -32,7 +32,9 @@ export const Contact: React.FC<{contact: ContactI}> = React.memo((props) => {
     navigate(`/?conversation_id=${conversationId}`);
   }, [conversationId]);
   
-
+  const handleOptions = () => {
+    console.log("handle options");
+  }
   return (
     <Container isActiveChat={isActiveChat}>
       <Avatar onClick={onClick} alt="Avatar image" src={photo} />
@@ -46,12 +48,15 @@ export const Contact: React.FC<{contact: ContactI}> = React.memo((props) => {
       </InfoSection>
 
       {unreadMessages ? <UnreadMessages>{unreadMessages}</UnreadMessages> : null}
+      <StyledIcon onClick={handleOptions}></StyledIcon>
     </Container>
   );
 });
 
 const Container = styled.div<{isActiveChat: boolean}>`
   display: flex;
+  flex-direction: row;
+  align-items: center;
   width: 100%;
   padding: 10px 8px;
   transition: all 0.2s;
@@ -98,4 +103,12 @@ const UnreadMessages = styled.div`
   border-radius: 15px;
   background-color: ${({theme}) => theme.palette.primary.light};
   font-size: 14px;
+`;
+
+const StyledIcon = styled(BsThreeDots)`
+  fill: ${({ theme }) => theme.palette.text};
+  width: 20px;
+  height: 20px;
+  margin: 0 10px;
+  cursor: pointer;
 `;
