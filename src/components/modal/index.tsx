@@ -15,7 +15,6 @@ const Modal: React.FC<ModalProps> = React.memo(({onModalClose, Content}) => {
     if (modalRef.current?.contains(event.target as Node)) {
       return;
     }
-
     onModalClose();
   }, []);
 

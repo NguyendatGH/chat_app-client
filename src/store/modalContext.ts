@@ -2,35 +2,45 @@ import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
 
+interface ModalItem {
+  key: string;
+  component: keyof ModalsMap;
+}
 
 interface ModalContext {
-  isModalOpen: boolean;
-  currentModal: keyof ModalsMap | null;
-  openModal: (modalKey: keyof ModalsMap) => void;
-  closeModal: () => void;
+  modals: ModalItem[];
+  openModal: (key: string, modalKey: keyof ModalsMap) => void;
+  closeModal: (key: string) => void;
+  closeAllModals: () => void;
 }
 
 export interface ModalsMap {
   profile: JSX.Element;
   contact: JSX.Element;
+  [key: string]: JSX.Element;
 }
+
 
 
 const useModalContext = create<ModalContext>()(
   immer((set) => ({
-    isModalOpen: false,
-    currentModal: null,
-    openModal: (modalKey) => {
+    modals: [],
+    openModal: (key, modalKey) => {
       set((state) => {
-        state.isModalOpen = true;
-        state.currentModal = modalKey;
+        if (!state.modals.some((modal) => modal.key === key)) {
+          state.modals.push({ key, component: modalKey });
+        }
       });
     },
 
-    closeModal: () => {
+    closeModal: (key) => {
       set((state) => {
-        state.isModalOpen = false;
-        state.currentModal = null;
+        state.modals = state.modals.filter((modal) => modal.key !== key);
+      });
+    },
+    closeAllModals: () => {
+      set((state) => {
+        state.modals = [];
       });
     },
   }))

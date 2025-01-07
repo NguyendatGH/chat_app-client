@@ -33,7 +33,7 @@ export const createContact = (
   axiosInstance
     .post("/contact", { username }, { headers: defaultHeaders() })
     .then((response) => {
-      console.log("create new user!" +response.data);
+      // console.log("create new user!" +response.data);
       return response.data
     });
 
@@ -43,7 +43,7 @@ export const createContact = (
       return axiosInstance
         .get(`/conversation/${id}`, { headers: defaultHeaders() })
         .then((response) => {
-          console.log("get conversation from front end / user api: ",response.data);
+          // console.log("get conversation from front end / user api: ",response.data);
           return response.data;
         });
     };

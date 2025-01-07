@@ -1,17 +1,24 @@
-import {Contact as ContactI} from "@/interfaces";
-import React, {useCallback, useEffect, useState} from "react";
+import { Contact as ContactI } from "@/interfaces";
+import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useQueryParams from "@/hooks/useQueryParams";
 import moment from "moment";
 import { BsThreeDots } from "react-icons/bs";
+import useModalContext from "@/store/modalContext";
+// import { ConfirmationModal } from "../modal/modalsOptions/confirmationModal";
 
-
-export const Contact: React.FC<{contact: ContactI}> = React.memo((props) => {
-  const {photo, username, conversationId, unreadMessages : inititalUnreadMessages, lastMessage} = props.contact;
+export const Contact: React.FC<{ contact: ContactI }> = React.memo((props) => {
+  const {
+    photo,
+    username,
+    conversationId,
+    unreadMessages: inititalUnreadMessages,
+    lastMessage,
+  } = props.contact;
 
   const [unreadMessages, setUnreadMessages] = useState(inititalUnreadMessages);
- 
+  // const [isVisible, setIsModalVisible] = useState<boolean>(false);
 
   const queryParams = useQueryParams();
   const navigate = useNavigate();
@@ -19,52 +26,82 @@ export const Contact: React.FC<{contact: ContactI}> = React.memo((props) => {
   const activeConversationId = Number(queryParams.get("conversation_id"));
 
   const isActiveChat = conversationId === activeConversationId;
- 
-  // console.log("isActive chat?",isActiveChat)
- 
+
   useEffect(() => {
-    if(isActiveChat){
+    if (isActiveChat) {
       setUnreadMessages(0);
     }
   }, [isActiveChat]);
 
   const onClick = useCallback(() => {
     navigate(`/?conversation_id=${conversationId}`);
-  }, [conversationId]);
-  
-  const handleOptions = () => {
-    console.log("handle options");
-  }
+  }, [conversationId, navigate]);
+
+  const {openModal} = useModalContext();
+
+
+  const toggleModal = () => {
+    console.log("open modal");
+    openModal("contactoption", "contactOption");
+  };
+
   return (
     <Container isActiveChat={isActiveChat}>
       <Avatar onClick={onClick} alt="Avatar image" src={photo} />
       <InfoSection onClick={onClick}>
         <h3>{username}</h3>
         <LastMessage>
-          {lastMessage ? lastMessage?.text : "No messages yet"}</LastMessage>
+          {lastMessage ? lastMessage?.text : "No messages yet"}
+        </LastMessage>
         <LastMessageDate>
-          {lastMessage ? `Last message: ${moment(lastMessage.updateAt).format("L")}` : null}
+          {lastMessage
+            ? `Last message: ${moment(lastMessage.updateAt).format("L")}`
+            : null}
         </LastMessageDate>
       </InfoSection>
 
-      {unreadMessages ? <UnreadMessages>{unreadMessages}</UnreadMessages> : null}
-      <StyledIcon onClick={handleOptions}></StyledIcon>
+      {unreadMessages ? (
+        <UnreadMessages>{unreadMessages}</UnreadMessages>
+      ) : null}
+      <StyledIcon onClick={toggleModal} />
+      {/* {isVisible && (
+        <ConfirmationModal
+          title={"choose your option"}
+          options={[
+            {
+              label: "Delete",
+              onClick: () => {
+                console.log("Item deleted");
+                setIsModalVisible(false);
+              },
+            },
+            {
+              label: "Clear conversation",
+              onClick: () => setIsModalVisible(false),
+            },
+          ]}
+          onClose={() => setIsModalVisible(false)}
+        />
+      )} */}
+
+     
     </Container>
   );
 });
 
-const Container = styled.div<{isActiveChat: boolean}>`
+const Container = styled.div<{ isActiveChat: boolean }>`
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
   width: 100%;
   padding: 10px 8px;
   transition: all 0.2s;
-  background-color: ${({theme, isActiveChat}) =>
+  background-color: ${({ theme, isActiveChat }) =>
     isActiveChat ? theme.palette.background.light : null};
 
   &:hover {
-    background-color: ${({theme}) => theme.palette.background.light};
+    background-color: ${({ theme }) => theme.palette.background.light};
   }
 `;
 
@@ -86,11 +123,11 @@ const InfoSection = styled.div`
 `;
 
 const LastMessage = styled.p`
-  color: ${({theme}) => theme.palette.text};
+  color: ${({ theme }) => theme.palette.text};
   margin-top: 4px;
 `;
 const LastMessageDate = styled.p`
-  color: ${({theme}) => theme.palette.primary.light};
+  color: ${({ theme }) => theme.palette.primary.light};
   font-size: 14px;
 `;
 
@@ -101,7 +138,7 @@ const UnreadMessages = styled.div`
   width: 20px;
   height: 20px;
   border-radius: 15px;
-  background-color: ${({theme}) => theme.palette.primary.light};
+  background-color: ${({ theme }) => theme.palette.primary.light};
   font-size: 14px;
 `;
 

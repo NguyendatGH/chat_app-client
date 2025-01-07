@@ -15,10 +15,10 @@ export const Contacts: React.FC = () => {
     ? Number(queryParams.get("conversationId")) + 1
     : null;
 
-  console.log("conversation id: ", conversationId);
+  // console.log("conversation id: ", conversationId);
   const { user } = useAuthContext();
   const { socket } = useSocketContext();
-  console.log("running index/contact components: ");
+  // console.log("running index/contact components: ");
   const {
     filteredContacts,
     addContact,
@@ -47,7 +47,7 @@ export const Contacts: React.FC = () => {
 
   useEffect(() => {
     socket.on("newContact", (contact: Contact) => {
-      console.log("contact new", contact);
+      // console.log("contact new", contact);
       addContact(contact);
       filterContacts();
     });
@@ -76,8 +76,7 @@ export const Contacts: React.FC = () => {
         <p>Loading...</p>
       ) : (
         <>
-          {console.log("is Loading : ", isLoading)}
-          {console.log("Filtered Contacts:", filteredContacts)}
+          
           {filteredContacts && filteredContacts.length > 0 ? (
             filteredContacts?.map((contact) => (
               <ContactComponent key={contact.id} contact={contact} />

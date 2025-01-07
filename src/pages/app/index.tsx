@@ -8,14 +8,17 @@ import { SideBar } from "@/components/sidebar";
 import Modal from "@/components/modal";
 import { ProfileModal } from "@/components/modal/modalsOptions/profileModal";
 import { AddContactModal } from "@/components/modal/modalsOptions/addContactModal";
+import { ContactOption } from "@/components/modal/modalsOptions/contactOption";
+// import { ConfirmationModal } from "@/components/modal/modalsOptions/confirmationModal";
 
 const modalsMap: ModalsMap = {
   profile: <ProfileModal />,
   contact: <AddContactModal />,
+  contactOption: <ContactOption/>
 };
 
 const App = () => {
-  const { isModalOpen, closeModal, currentModal } = useModalContext();
+  const { modals, closeModal } = useModalContext();
   const queryParams = useQueryParams();
   const conversationId = Number(queryParams.get("conversation_id"));
 
@@ -37,9 +40,13 @@ const App = () => {
           )}
         </MessagesWrapper>
       </Container>
-      {isModalOpen && currentModal && (
-        <Modal onModalClose={closeModal} Content={modalsMap[currentModal]} />
-      )}
+      {modals.map((modal) => (
+        <Modal
+          key={modal.key}
+          onModalClose={() => closeModal(modal.key)}
+          Content={modalsMap[modal.component]}
+        />
+      ))}
     </>
   );
 };

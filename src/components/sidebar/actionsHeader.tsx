@@ -28,11 +28,11 @@ export const ActionsHeader = () => {
   const menuItems = [
     {
       label: "My Profile",
-      onClick: () => openModal("profile"),
+      onClick: () => openModal("profile-modal","profile"),
     },
     {
       label: "Add Contact",
-      onClick: () => openModal("contact"),
+      onClick: () => openModal("addcontact-modal","contact"),
     },
     {
       label: "Logout",
