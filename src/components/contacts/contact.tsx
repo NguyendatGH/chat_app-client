@@ -41,7 +41,6 @@ export const Contact: React.FC<{ contact: ContactI }> = React.memo((props) => {
 
 
   const toggleModal = () => {
-    console.log("open modal");
     openModal("contactoption", "contactOption");
   };
 
@@ -63,28 +62,7 @@ export const Contact: React.FC<{ contact: ContactI }> = React.memo((props) => {
       {unreadMessages ? (
         <UnreadMessages>{unreadMessages}</UnreadMessages>
       ) : null}
-      <StyledIcon onClick={toggleModal} />
-      {/* {isVisible && (
-        <ConfirmationModal
-          title={"choose your option"}
-          options={[
-            {
-              label: "Delete",
-              onClick: () => {
-                console.log("Item deleted");
-                setIsModalVisible(false);
-              },
-            },
-            {
-              label: "Clear conversation",
-              onClick: () => setIsModalVisible(false),
-            },
-          ]}
-          onClose={() => setIsModalVisible(false)}
-        />
-      )} */}
-
-     
+      <StyledIcon onClick={toggleModal} />     
     </Container>
   );
 });

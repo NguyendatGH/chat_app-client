@@ -13,7 +13,7 @@ const defaultHeaders = () => {
   };
 };
 
-// console.log(defaultHeaders()); 
+// console.log(defaultHeaders());
 
 export const getContacts = async (): Promise<GetContactResponse> => {
   try {
@@ -34,16 +34,29 @@ export const createContact = (
     .post("/contact", { username }, { headers: defaultHeaders() })
     .then((response) => {
       // console.log("create new user!" +response.data);
-      return response.data
+      return response.data;
     });
 
-    export const getConversation = (
-      id: number | null
-    ): Promise<ConversationResponse> => {
-      return axiosInstance
-        .get(`/conversation/${id}`, { headers: defaultHeaders() })
-        .then((response) => {
-          // console.log("get conversation from front end / user api: ",response.data);
-          return response.data;
-        });
-    };
+export const getConversation = (
+  id: number | null
+): Promise<ConversationResponse> => {
+  return axiosInstance
+    .get(`/conversation/${id}`, { headers: defaultHeaders() })
+    .then((response) => {
+      // console.log("get conversation from front end / user api: ",response.data);
+      return response.data;
+    });
+};
+
+export const resetConversation = async (id: number): Promise<void> => {
+  try{
+
+    await axiosInstance.delete(`/conversation/${id}/reset`,{
+      headers: defaultHeaders(),
+    });
+    console.log("call to sever");
+  }catch(error){
+    console.log("error reset conversation", error);
+    throw error;
+  }
+}

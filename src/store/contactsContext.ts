@@ -20,14 +20,14 @@ const useContactsContext = create<ContactsContext>()(
     filteredContacts: [],
     filterKey: "",
     setContacts: (contacts) => {
-      console.log("contacts to set: /(store)", contacts);
+      // console.log("contacts to set: /(store)", contacts);
       set((state) => {
         if (!Array.isArray(contacts)) {
           console.error("invalid contact data: ", contacts);
           return;
         }
         state.contacts = contacts;
-        console.log("contact context: ", state.contacts);
+        // console.log("contact context: ", state.contacts);
       });
     },
     clearContacts: () => {
@@ -72,7 +72,7 @@ const useContactsContext = create<ContactsContext>()(
     },
     setFilterKey: (key: string) => {
       set((state) => {
-        console.log("filtered key: ", key);
+        // console.log("filtered key: ", key);
         state.filterKey = key;
       });
     },

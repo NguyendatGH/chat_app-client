@@ -33,7 +33,7 @@ export const Contacts: React.FC = () => {
     queryKey: ["contacts"],
     queryFn: async () => {
       try {
-        console.log("Fetching contacts...");
+        // console.log("Fetching contacts...");
         const data = await getContacts();
         setContacts(data.contacts);
         return data;

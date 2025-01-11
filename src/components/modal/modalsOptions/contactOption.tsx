@@ -4,8 +4,12 @@ import { MdRestore } from "react-icons/md";
 import { DefaultTheme } from "styled-components/dist/types";
 import { useState } from "react";
 import Modal from "..";
+import useConversationContext from "@/store/conversationContext";
 export const ContactOption: React.FC = () => {
   const [modalType, setModalType] = useState<("delete" | "clear")[]>([]);
+
+  const { resetMessage } = useConversationContext();
+
   const openModal = (type: "delete" | "clear") => {
     setModalType((prev) => [...prev, type]);
   };
@@ -19,6 +23,7 @@ export const ContactOption: React.FC = () => {
         return (
           <ModalContent>
             <h2>Are you sure to delete this conversation ?</h2>
+            <span>this action cannot be restore!</span>
             <ButtonGroup>
               <Button onClick={deleteContact}>Yes</Button>
               <Button onClick={closeModal}>Cancel</Button>
@@ -29,6 +34,7 @@ export const ContactOption: React.FC = () => {
         return (
           <ModalContent>
             <h2>Are you sure to clear this conversation ?</h2>
+            <span>this action cannot be restore!</span>
             <ButtonGroup>
               <Button onClick={clearConversation}>Yes</Button>
               <Button onClick={closeModal}>Cancel</Button>
@@ -36,13 +42,15 @@ export const ContactOption: React.FC = () => {
           </ModalContent>
         );
       default:
-        return <></>
+        return <></>;
     }
   };
   const deleteContact = () => {
     closeModal();
   };
-  const clearConversation = () => {
+  const clearConversation = async () => {
+    await resetMessage();
+    alert("all message have been deleted!");
     closeModal();
   };
   return (

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MessageInput } from "@/components/inputs/messageInput";
 import Messages from "@/components/messages";
 import useModalContext, { ModalsMap } from "@/store/modalContext";
@@ -9,12 +9,12 @@ import Modal from "@/components/modal";
 import { ProfileModal } from "@/components/modal/modalsOptions/profileModal";
 import { AddContactModal } from "@/components/modal/modalsOptions/addContactModal";
 import { ContactOption } from "@/components/modal/modalsOptions/contactOption";
-// import { ConfirmationModal } from "@/components/modal/modalsOptions/confirmationModal";
+import useConversationContext from "@/store/conversationContext";
 
 const modalsMap: ModalsMap = {
   profile: <ProfileModal />,
   contact: <AddContactModal />,
-  contactOption: <ContactOption/>
+  contactOption: <ContactOption />,
 };
 
 const App = () => {
@@ -22,6 +22,11 @@ const App = () => {
   const queryParams = useQueryParams();
   const conversationId = Number(queryParams.get("conversation_id"));
 
+  const { setActiveConversationId } = useConversationContext();
+
+  useEffect(() => {
+    setActiveConversationId(conversationId);
+  }, [conversationId, setActiveConversationId]);
   return (
     <>
       <Container>
