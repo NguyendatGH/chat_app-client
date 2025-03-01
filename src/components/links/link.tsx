@@ -1,5 +1,5 @@
 import React from "react";
-import {Link as RouterLink} from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import styled from "styled-components";
 
 interface LinkProps {
@@ -7,12 +7,14 @@ interface LinkProps {
   children: React.ReactNode;
 }
 
-export const Link: React.FC<LinkProps> = ({href, children}) => {
+export const Link: React.FC<LinkProps> = ({ href, children }) => {
   return <StyledLink to={href}>{children}</StyledLink>;
 };
 
 const StyledLink = styled(RouterLink)`
-  color: ${({theme}) => theme.palette.primary.main};
+  font-size: 12px;
+
+  color: ${({ theme }) => theme.palette.primary.main};
   text-decoration: none;
 
   &:hover {

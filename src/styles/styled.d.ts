@@ -1,29 +1,32 @@
 // styled.d.ts
-import 'styled-components'
+import "styled-components";
 
-declare module 'styled-components' {
+declare module "styled-components" {
   export interface DefaultTheme {
     palette: {
       background: {
-        main: string
-        dark: string
-        light: string
-      }
+        theme: string;
+        appBg: string;
+      };
       primary: {
-        main: string
-        dark: string
-        light: string
-      }
-      gray: {
-        main: string
-      }
-      text: string
-      success: string
-      error: string
-      warning: string
-    }
+        main: string; //button color
+        dark: string;
+        light: string;
+      };
+
+      buttonText: string;
+      text: {
+        mainColor: string;
+        inputBorder: string;
+      };
+      priority: {
+        success: string;
+        error: string;
+        warning: string;
+      };
+    };
     breakpoints: {
-      mobile: string
-    }
+      mobile: string;
+    };
   }
 }

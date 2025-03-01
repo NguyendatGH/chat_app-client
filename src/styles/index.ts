@@ -11,7 +11,7 @@ const styles = createGlobalStyle<{isModalOpen: boolean}>`
   #root {
     width: 100%;
     height: 100vh;
-    background-color: ${({theme}) => theme.palette.background.main};
+    background-color: ${({theme}) => theme.palette.background.theme};
     display: flex;
     flex-direction: column;
     align-items: center;

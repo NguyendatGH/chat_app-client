@@ -1,24 +1,59 @@
-import {DefaultTheme} from "styled-components";
+import { DefaultTheme } from "styled-components";
 
-export const defaultTheme: DefaultTheme = {
+export const darkTheme: DefaultTheme = {
   palette: {
     background: {
-      main: "#525561",
-      dark: "#272a37",
-      light: "#323644",
+      theme: "#525561",
+      appBg: "#272a37",
     },
     primary: {
       main: "#1d90f5",
       light: "#58aef9",
       dark: "#0082f4",
     },
-    gray: {
-      main: "#555b69",
+   
+    text: {
+      mainColor: "#f7f7f7",
+      inputBorder: "#e1e1e1",
     },
-    error: "#C62828",
-    success: "#00897B",
-    text: "#F7F7F7",
-    warning: "#303F9F",
+
+    buttonText: "#f7f7f7",
+
+    priority: {
+      error: "#C62828",
+      success: "#00897B",
+      warning: "#303F9F",
+    },
+  },
+  breakpoints: {
+    mobile: "600px",
+  },
+};
+
+export const lightTheme: DefaultTheme = {
+  palette: {
+    background: {
+      theme: "#e8e8e8",
+      appBg: "#ffffff",
+    },
+    primary: {
+      main: "#1d90f5",
+      light: "#58aef9",
+      dark: "#0082f4",
+    },
+
+    buttonText: "#ffffff",
+    
+    text: {
+      mainColor: "#000000",
+      inputBorder: "#e1e1e1",
+    },
+
+    priority: {
+      error: "#C62828",
+      success: "#00897B",
+      warning: "#303F9F",
+    },
   },
   breakpoints: {
     mobile: "600px",

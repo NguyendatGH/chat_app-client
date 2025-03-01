@@ -1,9 +1,9 @@
 import React from "react";
-import {Formik, Form} from "formik";
+import { Formik, Form } from "formik";
 import styled from "styled-components";
 import Button from "@/components/buttons/button";
-import {TextInput} from "@/components/inputs/textInput";
-import {AuthCredentials} from "@/interfaces";
+import { TextInput } from "@/components/inputs/textInput";
+import { AuthCredentials } from "@/interfaces";
 import authValidationSchema from "@/pages/auth/utils/authValidationSchema";
 import useAuthMutation from "@/hooks/mutations/useAuthMutation";
 
@@ -21,21 +21,22 @@ const typeMap = {
   register: "Register",
 };
 
-export const AuthForm: React.FC<AuthFormProps> = ({type}) => {
-  const {error, isPending, mutate} = useAuthMutation();
+export const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
+  const { error, isPending, mutate } = useAuthMutation();
 
   return (
     <Container>
       <Formik
         initialValues={initialValues}
         validationSchema={authValidationSchema}
-        onSubmit={(value: AuthCredentials) => mutate({value, type})}
+        onSubmit={(value: AuthCredentials) => mutate({ value, type })}
       >
         <Form>
           <TextInput name="username" type="text" label="Username" />
           <TextInput name="password" type="password" label="Password" />
-
-          <Button>{isPending ? "Loading..." : typeMap[type]}</Button>
+          <ButtonWrapper>
+            <Button>{isPending ? "Loading..." : typeMap[type]}</Button>
+          </ButtonWrapper>
           <ErrorContainer>{error ? error : null}</ErrorContainer>
         </Form>
       </Formik>
@@ -48,7 +49,14 @@ const Container = styled.div`
   padding: 16px;
 `;
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+`;
+
 const ErrorContainer = styled.div`
-  color: ${({theme}) => theme.palette.error};
+  color: ${({ theme }) => theme.palette.priority.error};
   margin: 10px 0;
 `;

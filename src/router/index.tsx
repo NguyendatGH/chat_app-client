@@ -7,9 +7,9 @@ import {
 } from "react-router-dom";
 import { lazy, Suspense } from "react";
 
-import Styles from "@/styles";
 import useAuthContext from "@/store/authContext";
-import useModalContext from "@/store/modalContext";
+import ThemeToggle from "@/components/ThemeToggle/themeToggle";
+import GlobalStyle from "@/styles/globalStyle";
 
 const App = lazy(() => import("@/pages/app"));
 const Login = lazy(() => import("@/pages/auth/login"));
@@ -19,7 +19,7 @@ const NotFound = lazy(() => import("@/pages/404"));
 
 const Router = () => {
   const {isAuthenticated} = useAuthContext();
-  const {isModalOpen} = useModalContext();
+ 
 
   const PublicRouter = () =>
     !isAuthenticated ? <Outlet /> : <Navigate to="/" />;
@@ -28,7 +28,8 @@ const Router = () => {
 
   return (
     <BrowserRouter>
-      <Styles isModalOpen={isModalOpen} />
+     
+      <GlobalStyle/>
       <Suspense fallback={<Loading />}>
         <Routes>
           <Route element={<PublicRouter />}>
@@ -42,6 +43,7 @@ const Router = () => {
 
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <ThemeToggle />
       </Suspense>
     </BrowserRouter>
   );

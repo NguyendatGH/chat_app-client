@@ -1,14 +1,14 @@
 import React from "react";
-import {Link} from "@/components/links/link";
+import { Link } from "@/components/links/link";
 import styled from "styled-components";
-import {AuthForm} from "@/components/forms/authForm";
+import { AuthForm } from "@/components/forms/authForm";
 
 const Register = () => {
   return (
     <Container>
-      <Title>Create a new account</Title>
+      <Title>Register</Title>
       <AuthForm type="register" />
-      <Link href="/login">Already have an account? login</Link>
+      <Link href="/login">Already have an account?</Link>
     </Container>
   );
 };
@@ -16,17 +16,21 @@ const Register = () => {
 const Container = styled.section`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  background-color: ${({theme}) => theme.palette.background.dark};
-  max-width: 500px;
-  min-height: 500px;
-  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+
+  background-color: ${({ theme }) => theme.palette.background.appBg};
+  width: 360px;
+  border-radius: 16px;
   padding: 12px;
 `;
 
 const Title = styled.h1`
+  margin-top: 10px;
   text-align: center;
   margin-bottom: 16px;
+  color: ${({ theme }) => theme.palette.text.mainColor};
 `;
 
 export default Register;

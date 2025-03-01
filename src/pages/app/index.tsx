@@ -60,7 +60,7 @@ const Container = styled.main`
   width: 100%;
   height: 95%;
   max-width: 1280px;
-  background-color: ${({ theme }) => theme.palette.background.dark};
+  background-color: ${({ theme }) => theme.palette.background.theme};
   border-radius: 4px;
   display: flex;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;

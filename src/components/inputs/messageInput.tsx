@@ -80,8 +80,8 @@ const Input = styled.input`
   outline: none;
   padding: 6px;
   font-size: 18px;
-  background-color: ${({ theme }) => theme.palette.background.dark};
-  border: 2px solid ${({ theme }) => theme.palette.gray.main};
+  background-color: ${({ theme }) => theme.palette.background.appBg};
+  // border: 2px solid ${({ theme }) => theme.palette.gray.main};
   border-radius: 4px;
 `;
 

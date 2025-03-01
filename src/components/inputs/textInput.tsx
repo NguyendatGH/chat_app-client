@@ -1,5 +1,5 @@
-import {useField} from "formik";
-import {useMemo} from "react";
+import { useField } from "formik";
+import { useMemo } from "react";
 import styled from "styled-components";
 
 interface TextInputProps {
@@ -8,14 +8,20 @@ interface TextInputProps {
   type: "text" | "email" | "password";
 }
 
-export const TextInput: React.FC<TextInputProps> = ({label, name, type}) => {
-  const [field, meta] = useField({name});
+export const TextInput: React.FC<TextInputProps> = ({ label, name, type }) => {
+  const [field, meta] = useField({ name });
   const isError = useMemo(() => !!(meta.touched && meta.error), [meta]);
 
   return (
     <Container>
       <Label isError={isError}>{label}</Label>
-      <Input {...field} name={name} type={type} isError={isError} autoComplete="off" />
+      <Input
+        {...field}
+        name={name}
+        type={type}
+        isError={isError}
+        autoComplete="off"
+      />
       {isError ? <ErrorMessage>{meta.error}</ErrorMessage> : null}
     </Container>
   );
@@ -24,25 +30,31 @@ export const TextInput: React.FC<TextInputProps> = ({label, name, type}) => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 26px;
+  padding-bottom: 44px;
 `;
 
-const Label = styled.label<{isError: boolean}>`
-  font-size: 18px;
-  margin-bottom: 4px;
+const Label = styled.label<{ isError: boolean }>`
+  font-size: 14.5px;
+  margin-bottom: 2px;
+  color: ${({ theme }) => theme.palette.text.mainColor};
 `;
 
-const Input = styled.input<{isError: boolean}>`
+const Input = styled.input<{ isError: boolean }>`
   -webkit-appearance: none;
   outline: none;
   padding: 4px;
-  font-size: 18px;
-  background-color: ${({theme}) => theme.palette.background.dark};
+  font-size: 14px;
+
+  background-color: ${({ theme }) => theme.palette.background.appBg};
+  color:  ${({ theme }) => theme.palette.text.mainColor};
   border: none;
   border-bottom: 2px solid
-    ${({theme, isError}) => (isError ? theme.palette.error : theme.palette.background.light)};
+    ${({ theme, isError }) =>
+      isError ? theme.palette.priority.error : theme.palette.text.inputBorder};
 `;
 const ErrorMessage = styled.div`
-  color: ${({theme}) => theme.palette.error};
-  margin-top: 4px;
+  color: ${({ theme }) => theme.palette.priority.error};
+
+  font-size: 12px;
+  margin-top: 2px;
 `;
