@@ -28,7 +28,7 @@ const StyledButton = styled.button`
   transition: all 0.3s;
   padding: 2px 10px;
 
-  color: ${({theme}) => theme.palette.buttonText};
+  color: ${({theme}) => theme.palette.button.buttonText};
   
   &:hover {
     background-color: ${({ theme }) => theme.palette.primary.dark};

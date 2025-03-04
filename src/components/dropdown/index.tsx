@@ -25,7 +25,7 @@ export const Dropdown: React.FC<DropDownProps> = ({menuItems}) => {
 
 const Container = styled.div`
   width: 180px;
-  background-color: ${({theme}) => theme.palette.background.dark};
+  background-color: ${({theme}) => theme.palette.background.appBg};
   position: absolute;
   z-index: 2;
   right: 0;
@@ -43,7 +43,7 @@ const MenuItem = styled.div`
   transition: all 0.3s;
 
   &:hover {
-    background-color: ${({theme}) => theme.palette.background.light};
+    background-color: ${({theme}) => theme.palette.background.appBg};
   }
 `
 

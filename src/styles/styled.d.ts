@@ -9,21 +9,27 @@ declare module "styled-components" {
         appBg: string;
       };
       primary: {
-        main: string; //button color
+        main: string;
         dark: string;
         light: string;
       };
-
-      buttonText: string;
+      button: {
+        buttonColor: string;
+        buttonText: string;
+      };
       text: {
         mainColor: string;
+        secondColor: string;
         inputBorder: string;
+
       };
       priority: {
         success: string;
         error: string;
         warning: string;
       };
+
+      border: string;
     };
     breakpoints: {
       mobile: string;

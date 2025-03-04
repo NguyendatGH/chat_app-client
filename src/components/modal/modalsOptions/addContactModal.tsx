@@ -52,6 +52,6 @@ const Title = styled.h2`
 `;
 
 const ErrorContainer = styled.div`
-  color: ${({theme}) => theme.palette.error};
+  color: ${({theme}) => theme.palette.priority.error};
   margin: 10px 0;
 `;

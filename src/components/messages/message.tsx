@@ -22,7 +22,7 @@ const StyledMessage = styled.div<{isMyMessage: boolean}>`
   border-radius: 15px;
   padding: 6px 10px;
   background-color: ${({theme, isMyMessage}) =>
-    isMyMessage ? theme.palette.primary.main : theme.palette.gray.main};
+    isMyMessage ? theme.palette.primary.main : theme.palette.primary.main};
   margin-bottom: 8px;
   margin-left: ${({isMyMessage}) => (isMyMessage ? "auto" : "0")};
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;

@@ -81,7 +81,7 @@ const Input = styled.input`
   padding: 6px;
   font-size: 18px;
   background-color: ${({ theme }) => theme.palette.background.appBg};
-  // border: 2px solid ${({ theme }) => theme.palette.gray.main};
+  // border: 2px solid ${({ theme }) => theme.palette.text};
   border-radius: 4px;
 `;
 

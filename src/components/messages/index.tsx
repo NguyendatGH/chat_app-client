@@ -66,11 +66,11 @@ const Container = styled.div`
   }
 
   &::-webkit-scrollbar-track {
-    background: ${({theme}) => theme.palette.background.light};
+    background: ${({theme}) => theme.palette.background.theme};
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: ${({theme}) => theme.palette.gray.main};
+    background-color: ${({theme}) => theme.palette.text};
     border-radius: 10px;
   }
 `;

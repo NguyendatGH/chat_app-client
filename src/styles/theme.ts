@@ -11,19 +11,24 @@ export const darkTheme: DefaultTheme = {
       light: "#58aef9",
       dark: "#0082f4",
     },
-   
+
     text: {
       mainColor: "#f7f7f7",
+      secondColor:"#ebebeb",
       inputBorder: "#e1e1e1",
     },
 
-    buttonText: "#f7f7f7",
+    button: {
+      buttonColor: "#1d90f5",
+      buttonText: "#f7f7f7",
+    },
 
     priority: {
       error: "#C62828",
       success: "#00897B",
       warning: "#303F9F",
     },
+    border: "#ebebeb",
   },
   breakpoints: {
     mobile: "600px",
@@ -42,10 +47,15 @@ export const lightTheme: DefaultTheme = {
       dark: "#0082f4",
     },
 
-    buttonText: "#ffffff",
-    
+    button: {
+      buttonColor: "#1d90f5",
+      buttonText: "#f7f7f7",
+    },
+
+
     text: {
       mainColor: "#000000",
+      secondColor:"#aba5a5",
       inputBorder: "#e1e1e1",
     },
 
@@ -54,6 +64,7 @@ export const lightTheme: DefaultTheme = {
       success: "#00897B",
       warning: "#303F9F",
     },
+    border: "#ebebeb",
   },
   breakpoints: {
     mobile: "600px",

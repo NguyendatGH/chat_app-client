@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import {Contacts} from "../contacts";
-import {ActionsHeader} from "./actionsHeader";
+import { Contacts } from "../contacts";
+import { ActionsHeader } from "./actionsHeader";
 
 export const SideBar: React.FC = () => {
   return (
@@ -18,5 +18,9 @@ const Container = styled.section`
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid ${({theme}) => theme.palette.gray.main};
+
+  gap: 12px;
+
+  padding: 0 6px;
+  border-right: 2px solid ${({ theme }) => theme.palette.border};
 `;

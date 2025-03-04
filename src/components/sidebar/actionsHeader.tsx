@@ -2,7 +2,7 @@ import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import { RiMenu3Fill } from "react-icons/ri";
 import { BiSearch } from "react-icons/bi";
-import {Dropdown} from "@/components/dropdown/index";
+import { Dropdown } from "@/components/dropdown/index";
 import useAuthContext from "@/store/authContext";
 import useModalContext from "@/store/modalContext";
 import useSocketContext from "@/store/socketContext";
@@ -17,7 +17,7 @@ export const ActionsHeader = () => {
   const { resetConversationState } = useConversationContext();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const onFilter = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("action header:"+event.target.value);
+    console.log("action header:" + event.target.value);
     setFilterKey(event.target.value);
   }, []);
 
@@ -28,11 +28,11 @@ export const ActionsHeader = () => {
   const menuItems = [
     {
       label: "My Profile",
-      onClick: () => openModal("profile-modal","profile"),
+      onClick: () => openModal("profile-modal", "profile"),
     },
     {
       label: "Add Contact",
-      onClick: () => openModal("addcontact-modal","contact"),
+      onClick: () => openModal("addcontact-modal", "contact"),
     },
     {
       label: "Logout",
@@ -43,13 +43,12 @@ export const ActionsHeader = () => {
         resetConversationState();
       },
     },
-    
   ];
 
   return (
     <Container>
       <Heading>
-        <h2>Contacts</h2>
+        <h2 style={{fontSize: "18px"}}>All contacts</h2>
         <MenuIcon onClick={toggleMenu} size={22} />
         {isMenuVisible && (
           <Dropdown menuItems={menuItems} isOpen={isMenuVisible} />
@@ -57,7 +56,7 @@ export const ActionsHeader = () => {
       </Heading>
 
       <SearchContainer>
-        <SearchIcon size={16} />
+        <SearchIcon size={18} />
         <SearchBar
           defaultValue=""
           placeholder="Search contacts"
@@ -72,7 +71,11 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 8px;
+  padding: 6px;
+  padding-top: 10px;
+  gap: 12px;
+
+  background-color: transparent;
 `;
 
 const Heading = styled.div`
@@ -91,7 +94,7 @@ const SearchIcon = styled(BiSearch)`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  left: 6px;
+  left: 16px;
 `;
 
 const SearchContainer = styled.div`
@@ -102,10 +105,10 @@ const SearchContainer = styled.div`
 const SearchBar = styled.input`
   -webkit-appearance: none;
   outline: none;
-  padding: 4px 4px 4px 26px;
+  padding: 4px 4px 4px 36px;
   font-size: 18px;
-  background-color: ${({ theme }) => theme.palette.background.light};
-  border: none;
-  border-radius: 4px;
+  background-color: ${({ theme }) => theme.palette.background.appBg};
+  border: 2px solid ${({ theme }) => theme.palette.border};
+   border-radius: 24px;
   width: 100%;
 `;

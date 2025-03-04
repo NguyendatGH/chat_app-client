@@ -102,11 +102,11 @@ const Container = styled.section`
   }
 
   &::-webkit-scrollbar-track {
-    background: ${({ theme }) => theme.palette.background.light};
+    background: ${({ theme }) => theme.palette.background.theme};
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: ${({ theme }) => theme.palette.gray.main};
+    background-color: ${({ theme }) => theme.palette.background.appBg};
     border-radius: 10px;
   }
 `;

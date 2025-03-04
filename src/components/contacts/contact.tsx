@@ -6,7 +6,6 @@ import useQueryParams from "@/hooks/useQueryParams";
 import moment from "moment";
 import { BsThreeDots } from "react-icons/bs";
 import useModalContext from "@/store/modalContext";
-// import { ConfirmationModal } from "../modal/modalsOptions/confirmationModal";
 
 export const Contact: React.FC<{ contact: ContactI }> = React.memo((props) => {
   const {
@@ -18,7 +17,6 @@ export const Contact: React.FC<{ contact: ContactI }> = React.memo((props) => {
   } = props.contact;
 
   const [unreadMessages, setUnreadMessages] = useState(inititalUnreadMessages);
-  // const [isVisible, setIsModalVisible] = useState<boolean>(false);
 
   const queryParams = useQueryParams();
   const navigate = useNavigate();
@@ -37,8 +35,7 @@ export const Contact: React.FC<{ contact: ContactI }> = React.memo((props) => {
     navigate(`/?conversation_id=${conversationId}`);
   }, [conversationId, navigate]);
 
-  const {openModal} = useModalContext();
-
+  const { openModal } = useModalContext();
 
   const toggleModal = () => {
     openModal("contactoption", "contactOption");
@@ -48,21 +45,23 @@ export const Contact: React.FC<{ contact: ContactI }> = React.memo((props) => {
     <Container isActiveChat={isActiveChat}>
       <Avatar onClick={onClick} alt="Avatar image" src={photo} />
       <InfoSection onClick={onClick}>
-        <h3>{username}</h3>
+        <h3 style={{ fontSize: "18px" , fontWeight:"400", fontFamily:"Poppins"}}>{username}</h3>
         <LastMessage>
           {lastMessage ? lastMessage?.text : "No messages yet"}
         </LastMessage>
-        <LastMessageDate>
-          {lastMessage
-            ? `Last message: ${moment(lastMessage.updateAt).format("L")}`
-            : null}
-        </LastMessageDate>
       </InfoSection>
 
       {unreadMessages ? (
         <UnreadMessages>{unreadMessages}</UnreadMessages>
       ) : null}
-      <StyledIcon onClick={toggleModal} />     
+      <UserOption>
+        <LastMessageDate>
+          {lastMessage
+            ? `${moment(lastMessage.updateAt).utcOffset(7).format("hh:mm A")}`
+            : null}
+        </LastMessageDate>
+        <StyledIcon onClick={toggleModal} />
+      </UserOption>
     </Container>
   );
 });
@@ -73,13 +72,13 @@ const Container = styled.div<{ isActiveChat: boolean }>`
   flex-direction: row;
   align-items: center;
   width: 100%;
-  padding: 10px 8px;
+  padding: 6px 8px;
   transition: all 0.2s;
   background-color: ${({ theme, isActiveChat }) =>
-    isActiveChat ? theme.palette.background.light : null};
+    isActiveChat ? theme.palette.background.appBg : null};
 
   &:hover {
-    background-color: ${({ theme }) => theme.palette.background.light};
+    background-color: ${({ theme }) => theme.palette.background.appBg};
   }
 `;
 
@@ -95,14 +94,15 @@ const InfoSection = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 2px 8px;
+  padding: 0px 4px;
   flex: 1;
   cursor: pointer;
 `;
 
 const LastMessage = styled.p`
-  color: ${({ theme }) => theme.palette.text};
-  margin-top: 4px;
+  color: ${({ theme }) => theme.palette.text.secondColor};
+  margin-top: 2px;
+  font-size: 14px;
 `;
 const LastMessageDate = styled.p`
   color: ${({ theme }) => theme.palette.primary.light};
@@ -119,9 +119,14 @@ const UnreadMessages = styled.div`
   background-color: ${({ theme }) => theme.palette.primary.light};
   font-size: 14px;
 `;
+const UserOption = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const StyledIcon = styled(BsThreeDots)`
-  fill: ${({ theme }) => theme.palette.text};
+  fill: ${({ theme }) => theme.palette.text.secondColor};
   width: 20px;
   height: 20px;
   margin: 0 10px;
