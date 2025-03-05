@@ -7,6 +7,7 @@ declare module "styled-components" {
       background: {
         theme: string;
         appBg: string;
+        chatBg: string;
       };
       primary: {
         main: string;
@@ -19,9 +20,8 @@ declare module "styled-components" {
       };
       text: {
         mainColor: string;
+        firstColor: string;
         secondColor: string;
-        inputBorder: string;
-
       };
       priority: {
         success: string;

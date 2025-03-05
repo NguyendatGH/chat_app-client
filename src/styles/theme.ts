@@ -5,6 +5,7 @@ export const darkTheme: DefaultTheme = {
     background: {
       theme: "#525561",
       appBg: "#272a37",
+      chatBg: "#f1f1f1",
     },
     primary: {
       main: "#1d90f5",
@@ -14,8 +15,8 @@ export const darkTheme: DefaultTheme = {
 
     text: {
       mainColor: "#f7f7f7",
-      secondColor:"#ebebeb",
-      inputBorder: "#e1e1e1",
+      firstColor: "CFD3E4",
+      secondColor: "#ebebeb",
     },
 
     button: {
@@ -40,6 +41,7 @@ export const lightTheme: DefaultTheme = {
     background: {
       theme: "#e8e8e8",
       appBg: "#ffffff",
+      chatBg: "#f1f1f1",
     },
     primary: {
       main: "#1d90f5",
@@ -52,11 +54,11 @@ export const lightTheme: DefaultTheme = {
       buttonText: "#f7f7f7",
     },
 
-
     text: {
       mainColor: "#000000",
-      secondColor:"#aba5a5",
-      inputBorder: "#e1e1e1",
+
+      firstColor: "#CFD3E4",
+      secondColor: "#aba5a5",
     },
 
     priority: {

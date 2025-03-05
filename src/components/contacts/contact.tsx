@@ -45,7 +45,11 @@ export const Contact: React.FC<{ contact: ContactI }> = React.memo((props) => {
     <Container isActiveChat={isActiveChat}>
       <Avatar onClick={onClick} alt="Avatar image" src={photo} />
       <InfoSection onClick={onClick}>
-        <h3 style={{ fontSize: "18px" , fontWeight:"400", fontFamily:"Poppins"}}>{username}</h3>
+        <h3
+          style={{ fontSize: "18px", fontWeight: "400", fontFamily: "Poppins" }}
+        >
+          {username}
+        </h3>
         <LastMessage>
           {lastMessage ? lastMessage?.text : "No messages yet"}
         </LastMessage>
@@ -72,13 +76,18 @@ const Container = styled.div<{ isActiveChat: boolean }>`
   flex-direction: row;
   align-items: center;
   width: 100%;
-  padding: 6px 8px;
+  padding: 8px 8px;
   transition: all 0.2s;
+  border: 1px solid
+    ${({ theme, isActiveChat }) =>
+      isActiveChat ? theme.palette.border : "transparent"};
+  border-radius: 12px;
+
   background-color: ${({ theme, isActiveChat }) =>
-    isActiveChat ? theme.palette.background.appBg : null};
+    isActiveChat ? theme.palette.background.chatBg : "transparent"};
 
   &:hover {
-    background-color: ${({ theme }) => theme.palette.background.appBg};
+    background-color: ${({ theme }) => theme.palette.background.chatBg};
   }
 `;
 
@@ -103,6 +112,10 @@ const LastMessage = styled.p`
   color: ${({ theme }) => theme.palette.text.secondColor};
   margin-top: 2px;
   font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
 `;
 const LastMessageDate = styled.p`
   color: ${({ theme }) => theme.palette.primary.light};
@@ -122,13 +135,12 @@ const UnreadMessages = styled.div`
 const UserOption = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: end;
 `;
 
 const StyledIcon = styled(BsThreeDots)`
   fill: ${({ theme }) => theme.palette.text.secondColor};
   width: 20px;
   height: 20px;
-  margin: 0 10px;
   cursor: pointer;
 `;

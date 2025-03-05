@@ -71,7 +71,6 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 6px;
   padding-top: 10px;
   gap: 12px;
 
@@ -109,6 +108,6 @@ const SearchBar = styled.input`
   font-size: 18px;
   background-color: ${({ theme }) => theme.palette.background.appBg};
   border: 2px solid ${({ theme }) => theme.palette.border};
-   border-radius: 24px;
+  border-radius: 12px;
   width: 100%;
 `;

@@ -49,6 +49,7 @@ export const ContactOption: React.FC = () => {
     closeModal();
   };
   const clearConversation = async () => {
+    // setMessages([]); 
     await resetMessage();
     alert("all message have been deleted!");
     closeModal();

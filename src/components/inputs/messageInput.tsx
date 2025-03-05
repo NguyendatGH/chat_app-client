@@ -17,7 +17,6 @@ export const MessageInput: React.FC = () => {
   const { conversation } = useConversationContext();
   const conversationId = Number(queryParams.get("conversation_id"));
 
-
   const ref = useRef<HTMLInputElement | null>(null);
 
   const sendMessage = useCallback(() => {
@@ -35,13 +34,12 @@ export const MessageInput: React.FC = () => {
       createdAt: new Date(),
     };
 
-
     socket.emit("message", {
       message: newMessage,
       conversation,
       myUserId: user.id,
     });
-    ref.current.value = ""; 
+    ref.current.value = "";
   }, [conversation, user]);
 
   const onSubmit = useCallback(
@@ -78,11 +76,12 @@ const Input = styled.input`
   -webkit-appearance: none;
   width: 100%;
   outline: none;
-  padding: 6px;
+  padding: 4px;
+  padding-left: 18px;
   font-size: 18px;
   background-color: ${({ theme }) => theme.palette.background.appBg};
-  // border: 2px solid ${({ theme }) => theme.palette.text};
-  border-radius: 4px;
+  border: 2px solid ${({ theme }) => theme.palette.border};
+  border-radius: 12px;
 `;
 
 const InputContainer = styled.div`

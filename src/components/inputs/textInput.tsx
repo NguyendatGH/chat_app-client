@@ -50,7 +50,7 @@ const Input = styled.input<{ isError: boolean }>`
   border: none;
   border-bottom: 2px solid
     ${({ theme, isError }) =>
-      isError ? theme.palette.priority.error : theme.palette.text.inputBorder};
+      isError ? theme.palette.priority.error : theme.palette.border};
 `;
 const ErrorMessage = styled.div`
   color: ${({ theme }) => theme.palette.priority.error};

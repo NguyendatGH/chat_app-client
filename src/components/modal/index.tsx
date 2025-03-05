@@ -46,7 +46,8 @@ const Container = styled.div`
   left: 50%;
   width: 400px;
   min-height: 200px;
-  background-color: ${({theme}) => theme.palette.background.theme};
+   background-color: ${({theme}) => theme.palette.background.appBg};
+ 
   z-index: 100;
   transform: translateX(-50%) translateY(-50%);
   border-radius: 4px;

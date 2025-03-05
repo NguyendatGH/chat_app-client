@@ -19,8 +19,8 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
 
-  gap: 12px;
+  gap: 20px;
 
-  padding: 0 6px;
+  padding: 0 10px;
   border-right: 2px solid ${({ theme }) => theme.palette.border};
 `;

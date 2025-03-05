@@ -97,6 +97,7 @@ const Container = styled.section`
   overflow-y: auto;
   overflow-x: hidden;
 
+
   &::-webkit-scrollbar {
     width: 10px;
   }

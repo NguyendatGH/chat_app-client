@@ -61,7 +61,7 @@ const Container = styled.main`
   height: 95%;
   max-width: 1280px;
   background-color: ${({ theme }) => theme.palette.background.appBg};
-  border-radius: 4px;
+  border-radius: 12px;
   display: flex;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 `;
@@ -76,6 +76,7 @@ const MessagesWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 70%;
+  background-color: ${({ theme }) => theme.palette.background.chatBg};
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     width: 50%;
   }
