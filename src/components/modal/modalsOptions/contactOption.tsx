@@ -49,7 +49,7 @@ export const ContactOption: React.FC = () => {
     closeModal();
   };
   const clearConversation = async () => {
-    // setMessages([]); 
+    // setMessages([]);
     await resetMessage();
     alert("all message have been deleted!");
     closeModal();
@@ -59,11 +59,11 @@ export const ContactOption: React.FC = () => {
       <Container>
         <Title>Contact option</Title>
         <Option onClick={() => openModal("clear")}>
-          <IconComponent Icon={MdRestore} color="success" />
+          <IconComponent Icon={MdRestore} color="#00897B" />
           Clear Conversation
         </Option>
         <Option onClick={() => openModal("delete")}>
-          <IconComponent Icon={BiSolidTrash} color="error" />
+          <IconComponent Icon={BiSolidTrash} color="#C62828" />
           Delete Contact
         </Option>
       </Container>
@@ -104,6 +104,11 @@ const Option = styled.div`
   align-items: center;
   margin-bottom: 10px;
   cursor: pointer;
+
+  transition: background-color 0.2s ease-in-out;
+  &:hover {
+    background-color: ${({ theme }) => theme.palette.priority.warning};
+  }
 `;
 const StyledIcon = styled.div<{ color: keyof DefaultTheme["palette"] }>`
   fill: ${({ theme, color }) => theme.palette[color]};

@@ -22,7 +22,7 @@ export interface Message {
   id: number;
   from: number;
   text: string;
-  createAt: Date;
+  createdAt: Date;
   conversationId: number;
 }
 

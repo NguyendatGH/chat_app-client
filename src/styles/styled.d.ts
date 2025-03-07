@@ -22,6 +22,9 @@ declare module "styled-components" {
         mainColor: string;
         firstColor: string;
         secondColor: string;
+
+        textColor: string;
+        grayText: string;
       };
       priority: {
         success: string;
@@ -36,3 +39,4 @@ declare module "styled-components" {
     };
   }
 }
+

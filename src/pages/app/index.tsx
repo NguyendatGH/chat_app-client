@@ -58,7 +58,7 @@ const App = () => {
 
 const Container = styled.main`
   width: 100%;
-  height: 95%;
+  height: 88%;
   max-width: 1280px;
   background-color: ${({ theme }) => theme.palette.background.appBg};
   border-radius: 12px;
@@ -80,6 +80,8 @@ const MessagesWrapper = styled.div`
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     width: 50%;
   }
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
 `;
 
 const StyledH2 = styled.h2`

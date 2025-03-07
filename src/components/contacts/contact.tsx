@@ -46,25 +46,39 @@ export const Contact: React.FC<{ contact: ContactI }> = React.memo((props) => {
       <Avatar onClick={onClick} alt="Avatar image" src={photo} />
       <InfoSection onClick={onClick}>
         <h3
-          style={{ fontSize: "18px", fontWeight: "400", fontFamily: "Poppins" }}
+          style={{
+            fontSize: "18px",
+            fontWeight: "400",
+            fontFamily: "Poppins",
+          }}
         >
           {username}
         </h3>
+
         <LastMessage>
           {lastMessage ? lastMessage?.text : "No messages yet"}
         </LastMessage>
       </InfoSection>
 
-      {unreadMessages ? (
-        <UnreadMessages>{unreadMessages}</UnreadMessages>
-      ) : null}
       <UserOption>
         <LastMessageDate>
           {lastMessage
             ? `${moment(lastMessage.updateAt).utcOffset(7).format("hh:mm A")}`
             : null}
         </LastMessageDate>
-        <StyledIcon onClick={toggleModal} />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: "10px",
+          }}
+        >
+          {unreadMessages ? (
+            <UnreadMessages>{unreadMessages}</UnreadMessages>
+          ) : null}
+          <StyledIcon onClick={toggleModal} />
+        </div>
       </UserOption>
     </Container>
   );
@@ -109,7 +123,7 @@ const InfoSection = styled.div`
 `;
 
 const LastMessage = styled.p`
-  color: ${({ theme }) => theme.palette.text.secondColor};
+  color: ${({ theme }) => theme.palette.text.grayText};
   margin-top: 2px;
   font-size: 14px;
   white-space: nowrap;
@@ -130,7 +144,8 @@ const UnreadMessages = styled.div`
   height: 20px;
   border-radius: 15px;
   background-color: ${({ theme }) => theme.palette.primary.light};
-  font-size: 14px;
+  font-size: 12px;
+  color: ${({ theme }) => theme.palette.background.appBg};
 `;
 const UserOption = styled.div`
   display: flex;
@@ -139,7 +154,7 @@ const UserOption = styled.div`
 `;
 
 const StyledIcon = styled(BsThreeDots)`
-  fill: ${({ theme }) => theme.palette.text.secondColor};
+  fill: ${({ theme }) => theme.palette.text.grayText};
   width: 20px;
   height: 20px;
   cursor: pointer;

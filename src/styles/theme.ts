@@ -17,6 +17,9 @@ export const darkTheme: DefaultTheme = {
       mainColor: "#f7f7f7",
       firstColor: "CFD3E4",
       secondColor: "#ebebeb",
+
+      textColor: "#000000",
+      grayText: "#8e8e8e",
     },
 
     button: {
@@ -56,15 +59,18 @@ export const lightTheme: DefaultTheme = {
 
     text: {
       mainColor: "#000000",
+      firstColor: "#7678EE",
+      secondColor: "#EEEFFA",
 
-      firstColor: "#CFD3E4",
-      secondColor: "#aba5a5",
+      textColor: "#000000",
+
+      grayText: "#8e8e8e",
     },
 
     priority: {
       error: "#C62828",
       success: "#00897B",
-      warning: "#303F9F",
+      warning: "#dbdbdb",
     },
     border: "#ebebeb",
   },
