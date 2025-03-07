@@ -114,4 +114,5 @@ const Container = styled.section`
 
 const StyledParagraph = styled.p`
   padding: 12px;
+  color: ${({theme}) => theme.palette.text.textColor};
 `;

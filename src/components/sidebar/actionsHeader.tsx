@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { RiMenu3Fill } from "react-icons/ri";
 import { BiSearch } from "react-icons/bi";
@@ -16,6 +16,7 @@ export const ActionsHeader = () => {
   const { setFilterKey } = useContactsContext();
   const { resetConversationState } = useConversationContext();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
+
   const onFilter = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     console.log("action header:" + event.target.value);
     setFilterKey(event.target.value);
@@ -45,13 +46,32 @@ export const ActionsHeader = () => {
     },
   ];
 
+  const menuRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setIsMenuVisible(false);
+      }
+    };
+
+    if (isMenuVisible) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isMenuVisible]);
+
   return (
     <Container>
       <Heading>
         <Title>All contacts</Title>
         <MenuIcon onClick={toggleMenu} size={22} />
         {isMenuVisible && (
-          <Dropdown menuItems={menuItems} isOpen={isMenuVisible} />
+          <div ref={menuRef}>
+            <Dropdown menuItems={menuItems} isOpen={isMenuVisible} />
+          </div>
         )}
       </Heading>
 
@@ -86,8 +106,7 @@ const Heading = styled.div`
 
 const Title = styled.h2`
   font-size: 18px;
-  color: ${({theme}) => theme.palette.text.mainColor}
-
+  color: ${({ theme }) => theme.palette.text.mainColor};
 `;
 
 const MenuIcon = styled(RiMenu3Fill)`
@@ -100,12 +119,13 @@ const SearchIcon = styled(BiSearch)`
   top: 50%;
   transform: translateY(-50%);
   left: 16px;
+
+  color: ${({ theme }) => theme.palette.text.grayText};
 `;
 
 const SearchContainer = styled.div`
   position: relative;
   width: 100%;
- 
 `;
 
 const SearchBar = styled.input`
@@ -113,6 +133,7 @@ const SearchBar = styled.input`
   outline: none;
   padding: 4px 4px 4px 36px;
   font-size: 18px;
+  color: ${({ theme }) => theme.palette.text.grayText};
   background-color: ${({ theme }) => theme.palette.background.appBg};
   border: 2px solid ${({ theme }) => theme.palette.border};
   border-radius: 12px;

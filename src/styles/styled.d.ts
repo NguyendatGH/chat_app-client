@@ -31,6 +31,7 @@ declare module "styled-components" {
         error: string;
         warning: string;
       };
+      boxShadow: string;
 
       border: string;
     };

@@ -22,22 +22,24 @@ export const ContactOption: React.FC = () => {
       case "delete":
         return (
           <ModalContent>
-            <h2>Are you sure to delete this conversation ?</h2>
-            <span>this action cannot be restore!</span>
+            <h3>Are you sure to delete this conversation ?</h3>
+            <span style={{ color: "#cc0000" }}>
+              this action cannot be restore!
+            </span>
             <ButtonGroup>
               <Button onClick={deleteContact}>Yes</Button>
-              <Button onClick={closeModal}>Cancel</Button>
+              <Button onClick={closeModal}>No</Button>
             </ButtonGroup>
           </ModalContent>
         );
       case "clear":
         return (
           <ModalContent>
-            <h2>Are you sure to clear this conversation ?</h2>
-            <span>this action cannot be restore!</span>
+            <h3>Are you sure to clear this conversation ?</h3>
+            <span style={{ color: "#cc0000" }}>this action cannot be restore!</span>
             <ButtonGroup>
               <Button onClick={clearConversation}>Yes</Button>
-              <Button onClick={closeModal}>Cancel</Button>
+              <Button onClick={closeModal}>No</Button>
             </ButtonGroup>
           </ModalContent>
         );
@@ -96,6 +98,7 @@ const Container = styled.div`
 
 const Title = styled.h2`
   margin-bottom: 20px;
+  color: ${({ theme }) => theme.palette.text.textColor};
 `;
 
 const Option = styled.div`
@@ -104,7 +107,7 @@ const Option = styled.div`
   align-items: center;
   margin-bottom: 10px;
   cursor: pointer;
-
+  color: ${({ theme }) => theme.palette.text.textColor};
   transition: background-color 0.2s ease-in-out;
   &:hover {
     background-color: ${({ theme }) => theme.palette.priority.warning};
@@ -122,20 +125,22 @@ const ModalContent = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  color: ${({ theme }) => theme.palette.text.textColor};
+  padding: 10px 24px;
 `;
 const ButtonGroup = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 20px;
 `;
 
 const Button = styled.button`
   background: ${({ theme }) => theme.palette.primary.main};
-  color: white;
+  color: ${({ theme }) => theme.palette.text.textColor};
+
   border: none;
-  padding: 8px 16px;
+  padding: 4px 12px;
   border-radius: 4px;
   cursor: pointer;
-
   &:hover {
     background: ${({ theme }) => theme.palette.primary.dark};
   }

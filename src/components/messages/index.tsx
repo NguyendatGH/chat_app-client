@@ -42,7 +42,7 @@ const Messages: React.FC = () => {
           {conversation && conversation?.messages?.length > 0 ? (
             conversation.messages.map((message) => <Message message={message} key={message.id} />)
           ) : (
-            <p>No messages yet</p>
+            <NoMessage>No messages yet</NoMessage>
           )}
         </>
       )}
@@ -73,6 +73,10 @@ const Container = styled.div`
     background-color: ${({theme}) => theme.palette.text};
     border-radius: 10px;
   }
+`;
+
+const NoMessage = styled.div`
+  color: ${({theme}) => theme.palette.text.textColor};
 `;
 
 export default Messages;

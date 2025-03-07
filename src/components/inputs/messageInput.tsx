@@ -4,6 +4,7 @@ import useSocketContext from "@/store/socketContext";
 import useQueryParams from "@/hooks/useQueryParams";
 import { IoSendSharp } from "react-icons/io5";
 import React, { useRef, useCallback } from "react";
+import {message} from "antd";
 import styled from "styled-components";
 
 type NewEvent =
@@ -16,19 +17,27 @@ export const MessageInput: React.FC = () => {
   const queryParams = useQueryParams();
   const { conversation } = useConversationContext();
   const conversationId = Number(queryParams.get("conversation_id"));
-
+  // const [error, setError] = useState("");
   const ref = useRef<HTMLInputElement | null>(null);
 
   const sendMessage = useCallback(() => {
-    console.log("Ref value:", ref.current?.value);
-    console.log("Conversation:", conversation);
-    console.log("User:", user);
-    if (!ref.current?.value || !user || !conversationId) {
+    // console.log("Ref value:", ref.current?.value);
+    // console.log("Conversation:", conversation);
+    // console.log("User:", user);
+
+    if(!ref.current?.value.trim()){
+      message.error("Please enter a message!");
       return;
     }
 
+
+    if (!user || !conversationId) {
+      return;
+    }
+
+
     const newMessage = {
-      text: ref.current.value,
+      text: ref.current?.value,
       from: user.id,
       conversationId: conversationId,
       createdAt: new Date(),
@@ -39,25 +48,26 @@ export const MessageInput: React.FC = () => {
       conversation,
       myUserId: user.id,
     });
+
     ref.current.value = "";
   }, [conversation, user]);
 
   const onSubmit = useCallback(
     (event: NewEvent) => {
-      console.log("Event triggered:", event);
-      console.log("Ref state on submit:", ref);
+      // console.log("Event triggered:", event);
+      // console.log("Ref state on submit:", ref);
       if (!conversation) {
-        console.log("no conversation / from messageInput");
+        // console.log("no conversation / from messageInput");
         return;
       }
 
       if (event.type === "keydown") {
         if ((event as React.KeyboardEvent).key === "Enter") {
-          console.log("Enter key pressed, calling sendMessage");
+          // console.log("Enter key pressed, calling sendMessage");
           sendMessage();
         }
       } else {
-        console.log("Icon clicked, calling sendMessage");
+        // console.log("Icon clicked, calling sendMessage");
         sendMessage();
       }
     },
@@ -98,3 +108,4 @@ const StyledIcon = styled(IoSendSharp)`
   margin: 0 10px;
   cursor: pointer;
 `;
+

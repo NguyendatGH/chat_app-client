@@ -45,6 +45,7 @@ const Container = styled.div`
   flex-direction: column;
   margin: 10px 0;
   padding: 16px;
+  color: ${({theme}) => theme.palette.text.textColor};
 `;
 
 const Title = styled.h2`

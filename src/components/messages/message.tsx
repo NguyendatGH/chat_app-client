@@ -7,7 +7,10 @@ import moment from "moment-timezone";
 export const Message = React.memo(({ message }: { message: MessageI }) => {
   const { user } = useAuthContext();
   const isMyMessage = user?.id === message.from;
-  const formattedTime = moment.utc(message.createdAt).tz("Asia/Bangkok").format("HH:mm");
+  const formattedTime = moment
+    .utc(message.createdAt)
+    .tz("Asia/Bangkok")
+    .format("HH:mm");
 
   return (
     <StyledMessage isMyMessage={isMyMessage}>
@@ -24,12 +27,14 @@ const StyledMessage = styled.div<{ isMyMessage: boolean }>`
   padding: 4px 12px;
   font-size: 16px;
   color: ${({ theme, isMyMessage }) =>
-    isMyMessage ? theme.palette.background.theme : theme.palette.text.mainColor};
+    isMyMessage ? theme.palette.text.textColor : theme.palette.text.mainColor};
   background-color: ${({ theme, isMyMessage }) =>
-    isMyMessage ? theme.palette.text.firstColor : theme.palette.text.secondColor};
+    isMyMessage
+      ? theme.palette.text.firstColor
+      : theme.palette.text.secondColor};
   margin-bottom: 8px;
   margin-left: ${({ isMyMessage }) => (isMyMessage ? "auto" : "0")};
-  box-shadow: 4px 4px 10px rgba(155, 155, 155, 0.2);
+  box-shadow: 4px 4px 10px  ${({ theme }) => theme.palette.boxShadow};
 
 
   word-wrap: break-word;

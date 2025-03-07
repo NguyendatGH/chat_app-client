@@ -26,6 +26,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 20px 20px 20px;
+    color: ${({theme}) => theme.palette.text.textColor};
 `;
 
 const Content = styled.section`
@@ -37,6 +38,7 @@ const Content = styled.section`
 const Title = styled.h2`
   margin-bottom: 20px;
   text-align: center;
+    color: ${({theme}) => theme.palette.text.textColor};
 `;
 
 const Image = styled.img`

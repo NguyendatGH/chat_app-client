@@ -45,15 +45,7 @@ export const Contact: React.FC<{ contact: ContactI }> = React.memo((props) => {
     <Container isActiveChat={isActiveChat}>
       <Avatar onClick={onClick} alt="Avatar image" src={photo} />
       <InfoSection onClick={onClick}>
-        <h3
-          style={{
-            fontSize: "18px",
-            fontWeight: "400",
-            fontFamily: "Poppins",
-          }}
-        >
-          {username}
-        </h3>
+        <ContactName>{username}</ContactName>
 
         <LastMessage>
           {lastMessage ? lastMessage?.text : "No messages yet"}
@@ -103,6 +95,13 @@ const Container = styled.div<{ isActiveChat: boolean }>`
   &:hover {
     background-color: ${({ theme }) => theme.palette.background.chatBg};
   }
+`;
+
+const ContactName = styled.h2`
+  font-size: 18px;
+  font-weight: 400;
+  font-family: Poppins;
+  color: ${({theme}) => theme.palette.text.textColor};
 `;
 
 const Avatar = styled.img`
