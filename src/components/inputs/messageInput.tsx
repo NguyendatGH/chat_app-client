@@ -54,20 +54,16 @@ export const MessageInput: React.FC = () => {
 
   const onSubmit = useCallback(
     (event: NewEvent) => {
-      // console.log("Event triggered:", event);
-      // console.log("Ref state on submit:", ref);
+
       if (!conversation) {
-        // console.log("no conversation / from messageInput");
         return;
       }
 
       if (event.type === "keydown") {
         if ((event as React.KeyboardEvent).key === "Enter") {
-          // console.log("Enter key pressed, calling sendMessage");
           sendMessage();
         }
       } else {
-        // console.log("Icon clicked, calling sendMessage");
         sendMessage();
       }
     },
@@ -89,6 +85,7 @@ const Input = styled.input`
   padding: 4px;
   padding-left: 18px;
   font-size: 18px;
+  color:  ${({ theme }) => theme.palette.text.mainColor};
   background-color: ${({ theme }) => theme.palette.background.appBg};
   border: 2px solid ${({ theme }) => theme.palette.border};
   border-radius: 12px;
@@ -102,7 +99,7 @@ const InputContainer = styled.div`
 `;
 
 const StyledIcon = styled(IoSendSharp)`
-  fill: ${({ theme }) => theme.palette.primary.light};
+  fill: ${({ theme }) => theme.palette.text.firstColor};
   width: 30px;
   height: 30px;
   margin: 0 10px;

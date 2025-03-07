@@ -20,7 +20,9 @@ export const Message = React.memo(({ message }: { message: MessageI }) => {
   );
 });
 
-const StyledMessage = styled.div<{ isMyMessage: boolean }>`
+const StyledMessage = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "isMyMessage",
+})<{isMyMessage : boolean}>`
   width: fit-content;
   max-width: 500px;
   border-radius: 12px;

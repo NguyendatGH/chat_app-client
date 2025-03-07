@@ -76,7 +76,9 @@ export const Contact: React.FC<{ contact: ContactI }> = React.memo((props) => {
   );
 });
 
-const Container = styled.div<{ isActiveChat: boolean }>`
+const Container = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "isActiveChat",
+})<{ isActiveChat: boolean }>`
   position: relative;
   display: flex;
   flex-direction: row;
@@ -101,7 +103,7 @@ const ContactName = styled.h2`
   font-size: 18px;
   font-weight: 400;
   font-family: Poppins;
-  color: ${({theme}) => theme.palette.text.textColor};
+  color: ${({theme}) => theme.palette.text.mainColor};
 `;
 
 const Avatar = styled.img`

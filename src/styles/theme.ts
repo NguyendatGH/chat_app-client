@@ -65,7 +65,7 @@ export const lightTheme: DefaultTheme = {
       firstColor: "#7678EE", //for messageBackground
       secondColor: "#EEEFFA",//for messageBackground
 
-      textColor: "#000000",
+      textColor: "#ffffff",
       grayText: "#8e8e8e",
     },
 

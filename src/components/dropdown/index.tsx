@@ -41,7 +41,7 @@ const MenuItem = styled.div`
   text-align: center;
   cursor: pointer;
   transition: all 0.3s;
-  color: ${({theme}) => theme.palette.text.textColor};
+  color: ${({theme}) => theme.palette.text.mainColor};
   &:hover {
     background-color: ${({theme}) => theme.palette.background.appBg};
   }
