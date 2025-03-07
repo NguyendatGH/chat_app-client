@@ -3,22 +3,22 @@ import { DefaultTheme } from "styled-components";
 export const darkTheme: DefaultTheme = {
   palette: {
     background: {
-      theme: "#525561",
+      theme: "#060A0F",
       appBg: "#272a37",
-      chatBg: "#f1f1f1",
+      chatBg: "#13191D",
     },
     primary: {
       main: "#1d90f5",
-      light: "#58aef9",
+      light: "#126EEF",
       dark: "#0082f4",
     },
 
     text: {
       mainColor: "#f7f7f7",
-      firstColor: "CFD3E4",
-      secondColor: "#ebebeb",
+      firstColor: "#126EEF",
+      secondColor: "#272F37",
 
-      textColor: "#000000",
+      textColor: "#7678EE",
       grayText: "#8e8e8e",
     },
 
@@ -32,7 +32,7 @@ export const darkTheme: DefaultTheme = {
       success: "#00897B",
       warning: "#303F9F",
     },
-    border: "#ebebeb",
+    border: "#272a37",
   },
   breakpoints: {
     mobile: "600px",
@@ -48,7 +48,7 @@ export const lightTheme: DefaultTheme = {
     },
     primary: {
       main: "#1d90f5",
-      light: "#58aef9",
+      light: "#7678EE",
       dark: "#0082f4",
     },
 

@@ -48,7 +48,7 @@ export const ActionsHeader = () => {
   return (
     <Container>
       <Heading>
-        <h2 style={{fontSize: "18px"}}>All contacts</h2>
+        <Title>All contacts</Title>
         <MenuIcon onClick={toggleMenu} size={22} />
         {isMenuVisible && (
           <Dropdown menuItems={menuItems} isOpen={isMenuVisible} />
@@ -84,6 +84,12 @@ const Heading = styled.div`
   position: relative;
 `;
 
+const Title = styled.h2`
+  font-size: 18px;
+  color: ${({theme}) => theme.palette.text.mainColor}
+
+`;
+
 const MenuIcon = styled(RiMenu3Fill)`
   cursor: pointer;
   margin-left: auto;
@@ -99,6 +105,7 @@ const SearchIcon = styled(BiSearch)`
 const SearchContainer = styled.div`
   position: relative;
   width: 100%;
+ 
 `;
 
 const SearchBar = styled.input`

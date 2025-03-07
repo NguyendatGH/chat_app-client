@@ -1,14 +1,14 @@
-import React, {useRef, useEffect, useCallback} from "react";
-import {Portal} from "react-portal";
+import React, { useRef, useEffect, useCallback } from "react";
+import { Portal } from "react-portal";
 import styled from "styled-components";
-import {BsXLg} from "react-icons/bs";
+import { BsXLg } from "react-icons/bs";
 
 interface ModalProps {
   onModalClose: () => void;
   Content: JSX.Element;
 }
 
-const Modal: React.FC<ModalProps> = React.memo(({onModalClose, Content}) => {
+const Modal: React.FC<ModalProps> = React.memo(({ onModalClose, Content }) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   const clickListener = useCallback((event: MouseEvent) => {
@@ -30,6 +30,7 @@ const Modal: React.FC<ModalProps> = React.memo(({onModalClose, Content}) => {
 
   return (
     <Portal>
+      <OverLay />
       <Container ref={modalRef}>
         <ModalHeader>
           <ExitIcon onClick={onModalClose} />
@@ -46,14 +47,25 @@ const Container = styled.div`
   left: 50%;
   width: 400px;
   min-height: 200px;
-   background-color: ${({theme}) => theme.palette.background.appBg};
- 
+  background-color: ${({ theme }) => theme.palette.background.appBg};
+
   z-index: 100;
   transform: translateX(-50%) translateY(-50%);
   border-radius: 4px;
   filter: blur(0);
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
   padding: 10px;
+`;
+
+const OverLay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  z-index: 99;
 `;
 
 const ModalHeader = styled.header`
@@ -65,7 +77,7 @@ const ModalHeader = styled.header`
 `;
 
 const ExitIcon = styled(BsXLg)`
-  fill: ${({theme}) => theme.palette.priority.error};
+  fill: ${({ theme }) => theme.palette.priority.error};
   font-size: 20px;
   cursor: pointer;
 `;

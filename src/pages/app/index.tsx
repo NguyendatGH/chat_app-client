@@ -29,7 +29,7 @@ const App = () => {
   }, [conversationId, setActiveConversationId]);
   return (
     <>
-      <Container>
+      <Container className={modals.length > 0 ? "blur-background" : ""}>
         <SidebarWrapper>
           <SideBar />
         </SidebarWrapper>
@@ -64,6 +64,11 @@ const Container = styled.main`
   border-radius: 12px;
   display: flex;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  transition: filter 0.3s ease-in-out;
+
+  &.blur-background {
+    filter: blur(5px);
+  }
 `;
 const SidebarWrapper = styled.div`
   width: 30%;

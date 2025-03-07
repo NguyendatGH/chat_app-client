@@ -9,9 +9,6 @@ export const Message = React.memo(({ message }: { message: MessageI }) => {
   const isMyMessage = user?.id === message.from;
   const formattedTime = moment.utc(message.createdAt).tz("Asia/Bangkok").format("HH:mm");
 
-  // console.log("Message create at: ", formattedTime);
-  // console.log("message raw: ", message.createdAt);
-
   return (
     <StyledMessage isMyMessage={isMyMessage}>
       <p>{message.text}</p>
