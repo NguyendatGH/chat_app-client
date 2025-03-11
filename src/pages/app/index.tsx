@@ -73,7 +73,8 @@ const Container = styled.main`
 const SidebarWrapper = styled.div`
   width: 30%;
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    width: 50%;
+    width: 100%;
+    display: none;
   }
 `;
 
@@ -85,6 +86,14 @@ const MessagesWrapper = styled.div`
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     width: 50%;
   }
+
+   @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    width: 60%;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    width: 100%; 
+  }
   border-top-right-radius: 12px;
   border-bottom-right-radius: 12px;
 `;
@@ -94,6 +103,7 @@ const StyledH2 = styled.h2`
   display: flex;
   flex-grow: 1;
   justify-content: center;
+  color: ${({ theme }) => theme.palette.text.textColor};
 `;
 
 export default App;

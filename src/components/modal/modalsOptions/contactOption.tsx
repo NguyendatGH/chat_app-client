@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { BiSolidTrash } from "react-icons/bi";
 import { MdRestore } from "react-icons/md";
 import { DefaultTheme } from "styled-components/dist/types";
@@ -16,12 +16,13 @@ export const ContactOption: React.FC = () => {
   const closeModal = () => {
     setModalType((prev) => prev.slice(0, prev.length - 1));
   };
+  const theme = useTheme();
 
-  const renderContent = (modalType: "delete" | "clear") => {
+  const renderContent = (modalType: "delete" | "clear", theme: DefaultTheme) => {
     switch (modalType) {
       case "delete":
         return (
-          <ModalContent>
+          <ModalContent style={{color: theme.palette.text.mainColor}}>
             <h3>Are you sure to delete this conversation ?</h3>
             <span style={{ color: "#cc0000" }}>
               this action cannot be restore!
@@ -35,7 +36,7 @@ export const ContactOption: React.FC = () => {
       case "clear":
         return (
           <ModalContent>
-            <h3>Are you sure to clear this conversation ?</h3>
+            <h3 >Are you sure to clear this conversation ?</h3>
             <span style={{ color: "#cc0000" }}>this action cannot be restore!</span>
             <ButtonGroup>
               <Button onClick={clearConversation}>Yes</Button>
@@ -51,7 +52,6 @@ export const ContactOption: React.FC = () => {
     closeModal();
   };
   const clearConversation = async () => {
-    // setMessages([]);
     await resetMessage();
     alert("all message have been deleted!");
     closeModal();
@@ -73,7 +73,7 @@ export const ContactOption: React.FC = () => {
         <Modal
           key={index}
           onModalClose={closeModal}
-          Content={renderContent(type)}
+          Content={renderContent(type, theme)}
         />
       ))}
     </>
@@ -98,7 +98,7 @@ const Container = styled.div`
 
 const Title = styled.h2`
   margin-bottom: 20px;
-  color: ${({ theme }) => theme.palette.text.textColor};
+  color: ${({ theme }) => theme.palette.text.mainColor};
 `;
 
 const Option = styled.div`
@@ -107,7 +107,7 @@ const Option = styled.div`
   align-items: center;
   margin-bottom: 10px;
   cursor: pointer;
-  color: ${({ theme }) => theme.palette.text.textColor};
+  color: ${({ theme }) => theme.palette.text.mainColor};
   transition: background-color 0.2s ease-in-out;
   &:hover {
     background-color: ${({ theme }) => theme.palette.priority.warning};

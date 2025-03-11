@@ -36,6 +36,7 @@ export const darkTheme: DefaultTheme = {
     border: "#353948",
   },
   breakpoints: {
+    tablet:"800px",
     mobile: "600px",
   },
 };
@@ -78,6 +79,7 @@ export const lightTheme: DefaultTheme = {
     border: "#ebebeb",
   },
   breakpoints: {
+    tablet:"800px",
     mobile: "600px",
   },
 };

@@ -36,6 +36,7 @@ declare module "styled-components" {
       border: string;
     };
     breakpoints: {
+      tablet: string;
       mobile: string;
     };
   }

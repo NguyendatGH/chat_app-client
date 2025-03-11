@@ -76,7 +76,7 @@ const Container = styled.div`
 `;
 
 const NoMessage = styled.div`
-  color: ${({theme}) => theme.palette.text.textColor};
+  color: ${({theme}) => theme.palette.text.mainColor};
 `;
 
 export default Messages;
