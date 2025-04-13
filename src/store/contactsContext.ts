@@ -49,12 +49,10 @@ const useContactsContext = create<ContactsContext>()(
         const contactPosition = state.contacts.findIndex(
           (contact) => contact.id === updatedContact.id
         );
-        // console.log("contact position", contactPosition);
         if (contactPosition === -1) {
           return;
         }
         state.contacts[contactPosition] = updatedContact;
-        // console.log(state.contacts[contactPosition]);
       });
     },
     filterContacts: () => {

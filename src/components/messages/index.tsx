@@ -9,7 +9,7 @@ import {Message} from "./message";
 import {MessagesSideEffects} from "./messageSideEffects";
 
 const Messages: React.FC = () => {
-  const {setConversation, conversation} = useConversationContext();
+  const {conversation, setConversation } = useConversationContext();
   const queryParams = useQueryParams();
   const conversationId = Number(queryParams.get("conversation_id"));
   const bottomRef = useRef<HTMLDivElement>(null);

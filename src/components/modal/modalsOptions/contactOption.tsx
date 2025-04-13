@@ -5,6 +5,7 @@ import { DefaultTheme } from "styled-components/dist/types";
 import { useState } from "react";
 import Modal from "..";
 import useConversationContext from "@/store/conversationContext";
+import { message } from "antd";
 export const ContactOption: React.FC = () => {
   const [modalType, setModalType] = useState<("delete" | "clear")[]>([]);
 
@@ -23,7 +24,7 @@ export const ContactOption: React.FC = () => {
       case "delete":
         return (
           <ModalContent style={{color: theme.palette.text.mainColor}}>
-            <h3>Are you sure to delete this conversation ?</h3>
+            <h3  style={{color: theme.palette.text.mainColor}} >Are you sure to delete this conversation ?</h3>
             <span style={{ color: "#cc0000" }}>
               this action cannot be restore!
             </span>
@@ -36,7 +37,7 @@ export const ContactOption: React.FC = () => {
       case "clear":
         return (
           <ModalContent>
-            <h3 >Are you sure to clear this conversation ?</h3>
+            <h3  style={{color: theme.palette.text.mainColor}}>Are you sure to clear this conversation ?</h3>
             <span style={{ color: "#cc0000" }}>this action cannot be restore!</span>
             <ButtonGroup>
               <Button onClick={clearConversation}>Yes</Button>
@@ -53,7 +54,8 @@ export const ContactOption: React.FC = () => {
   };
   const clearConversation = async () => {
     await resetMessage();
-    alert("all message have been deleted!");
+   
+    message.success("all message have been deleted!");
     closeModal();
   };
   return (

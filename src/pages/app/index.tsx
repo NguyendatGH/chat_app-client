@@ -103,7 +103,7 @@ const StyledH2 = styled.h2`
   display: flex;
   flex-grow: 1;
   justify-content: center;
-  color: ${({ theme }) => theme.palette.text.textColor};
+  color: ${({ theme }) => theme.palette.text.mainColor};
 `;
 
 export default App;

@@ -41,31 +41,24 @@ const useConversationContext = create<ConversationContext>()(
     },
 
     resetMessage: async () => {
-      set(async (state) => {
-        const activeConversationId = Number(get().activeConversationId);
-       
-
-
-        if (!activeConversationId) {
-          console.log("No active conversation id to reset message!");
-          return;
-        }
-
-        try {
-          await resetConversation(activeConversationId);
-          console.log("Message reset success!");
+      const activeConversationId = Number(get().activeConversationId);
+      if (!activeConversationId) {
+        console.log("No active conversation id to reset message!");
+        return;
+      }
+      try {
+        await resetConversation(activeConversationId);
+        console.log("Message reset success!");
+        set(async (state) => {
           state.conversation = {
             ...state.conversation,
             messages: [],
           } as Conversation;
-        } catch (error) {
-          console.error("error while resetting message ", error);
-        }
-      });
+        });
+      } catch (error) {
+        console.error("error while resetting message ", error);
+      }
     },
-
-
-   
   }))
 );
 
